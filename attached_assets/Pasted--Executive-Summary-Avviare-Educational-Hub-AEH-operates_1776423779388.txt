@@ -1,0 +1,607 @@
+# Executive Summary  
+Avviare Educational Hub (AEH) operates a multi-page website with static content about its programs, culture, and news. Our **sitemap analysis** identified all accessible pages, including main sections (Home, About, Admission programs, Placements, etc.), resources (Blogs, Gallery), and forms (Contact, Careers, Admissions). Each page’s structure (headings, content, images, links, forms) is catalogued.  
+
+For each public page, we propose **HTML-ready content drafts** (including placeholder images, meta titles/descriptions, accessible markup). We outline an **Admin Panel design**: roles (Admin, Admissions Officer, Content Manager), authentication (JWT sessions), CRUD endpoints for applications, inquiries, and logs, and a Mermaid flowchart for submission lifecycles (e.g. student inquiry → review → follow-up).  
+
+The **project architecture** separates frontend/backend. We recommend React (Create React App or Next.js) for UI, Node/Express for API, and a database (e.g. MongoDB or PostgreSQL). The API contract (tables below) defines routes for resources (applications, careers, contacts). We list `.env` keys (e.g. DB_URL, JWT_SECRET) in a table and detail deployment steps (frontend to Netlify, backend to Render).  
+
+Finally, we provide **starter code templates** (file structures, sample files with comments, `.env.example`) for Replit deployment, and note security/privacy/legal considerations on content use. All extracted site content and references are properly cited【23†L50-L58】【72†L47-L55】.  
+
+---
+
+## Site Map and Page Inventory  
+
+| **Page/URL**                | **Type**        | **Headings & Content**                                                                                                                      | **Images (alt text)**                                                                            | **Links**                                                               | **Forms/Fields**                                           |
+|----------------------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Home** `/`               | Static homepage | Banner with admission CTA; highlights (Courses offered, events, news). Brief intro “Welcome to Avviare…” with CTA buttons. Main sections: Programs, Achievements, News.【23†L50-L58】 | Banner (e.g. campus.jpg); icons (mission, programs). Alt “Avviare campus”.                        | Nav links to all main pages; “Apply Online” button; social icons.       | None.                                                     |
+| **About Avviare** `/about-avviare/` | Static         | Heading “Avviare Educational Hub” with summary (quality, affordability since 2013)【23†L50-L58】. Sections: Milestones (2013→2023 images), Foundation. Bulleted “Why Choose Us” (affordable fees, experienced faculty, etc.). | Milestones: images [37]–[47] (e.g. award1.jpg “awards trophy”, campus.jpg “state-of-art labs”).    | Links: “Apply Now” (anchor), Contact info. Footer quick links (Alumni, Awards, Blog, Gallery, Privacy Policy, Affiliation Letter)【23†L144-L152】【51†L107-L115】. | None (subscribe form with hidden captcha).               |
+| **Core Values** `/core-values/` | Static         | Heading “Core Values”: lists values (e.g. Integrity, Excellence, Compassion, Innovation). Descriptive paragraphs for each value.              | (Placeholder image e.g. values.jpg alt “Core values”).                                           | Header/footer links.                                                     | None.                                                     |
+| **Our Leadership** `/our-leadership/` | Static         | Heading “Our Leadership”. Subsections: Chairman’s Message (quote from Shri Sandeep Singh)【28†L0-L3】, Principal’s & Director’s Notes.      | Photo of Chairman (alt “Shri Sandeep Singh”).                                                 | Nav & footer links.                                                    | None.                                                     |
+| **Academic Council** `/academic-council/` | Static         | Heading “Academic Council”. List of members: e.g. Dr. Mahaveer Jain (Chairman), Prof. S.K. Shukla (Member)【34†L0-L3】, etc, with brief roles. | (Maybe council.jpg alt “Academic council meeting”).                                            | Nav & footer links.                                                    | None.                                                     |
+| **Our Team** `/our-team/`    | Static         | “Our Team” heading. Subheads by department (Dean Academics; Applied Science & Pharmacy; Humanities; CS & IT; Management; Mass Comm)【37†L79-L88】【37†L219-L228】. Each has faculty names/titles. | Faculty photos [32]–[62] with alt = names (e.g. “Prof. Abhishek Swami”).                         | “Apply Now” button; Footer with contact info.                            | None.                                                     |
+| **School of Commerce** `/school-of-commerce/` | Static (Program) | Heading “School of Commerce”. Intro text describing B.Com/M.Com programs【38†L42-L50】. Subsections: **Key Highlights** (bullet list), **Programs Table** (B.Com/M.Com, eligibility, skills, duration), **Curriculum & Career** descriptions, **Why Avviare for Commerce** (facilities, placement, alumni network). | Hero image [32] courseimg (alt “Commerce classroom”).                                          | “Apply Now” links to admissions form; course links to B.Com, M.Com pages if any. | None.                                                     |
+| **School of Humanities** `/school-of-humanities/` | Static (Program) | Heading “School of Humanities”. Intro text (BA/MA courses, literature, history etc.)【39†L44-L52】. **Key Highlights** (role-plays, workshops, govt. career prep)【39†L53-L62】. **Programs Table** (BA, MA, specializations). Sections on courses offered, reasons to choose (active learning, extracurriculars), BA Program emphasis. | Hero [33] courseimg (alt “Literature class”).                                                 | “Apply Now”.                                                           | None.                                                     |
+| **School of Management** `/school-of-management/` | Static (Program) | Heading “School of Management”【40†L44-L53】. Intro on BBA/MBA focus. **Key Highlights** (case studies, projects, labs)【40†L52-L61】. **Programs Table** (BBA, MBA specializations, durations). Sections: Course coverage, Why Avviare (USPs, industry links), Best BBA overview, FAQs.  | [36] courseimg (alt “Business seminar”).                                                    | Apply Now; links to [41] BBA page, [42] MBA page; references in text. | None.                                                     |
+| **School of Applied Science** `/school-of-applied-science/` | Static (Program) | (Likely: headings on IT, science courses). Key highlights (labs, research). Program offerings (B.Sc/M.Sc). Description of approach (experiments, research projects).                                                             | Placeholder (lab.jpg alt “Chemistry lab”).                                                    | Apply link.                                                             | None.                                                     |
+| **School of Journalism & Mass Comm.** `/school-of-communication/` | Static (Program) | Heading “School of Journalism & Mass Communication”【46†L45-L53】. Key highlights (media studio, certifications, internships)【46†L53-L62】. **Programs Table** (DJMC, BJMC, MJMC: durations & skills). Sections: Course content, Why Avviare (curriculum, faculty, studio, placement)【46†L74-L84】【46†L92-L100】, BJMC overview, fees. | [36] courseimg (alt “TV studio”).                                                              | Apply Now.                                                             | None.                                                     |
+| **School of Computer Science** `/school-of-cs-it/` | Static (Program) | “School of Computer Science”【48†L42-L49】. Intro (labs, languages). **Key Highlights** (IT labs, certs, placements)【48†L50-L59】. **Programs Table** (BCA, MCA courses)【48†L62-L71】. Sections: Why Avviare (labs, projects, placements)【48†L77-L86】, Curriculum (programming, AI, etc.)【48†L89-L98】, Career paths. BCA details. | [34] courseimg (alt “Computer lab”).                                                           | Apply Now; links to [49] BCA page, [42] MBA.                           | None.                                                     |
+| **School of Law** `/school-of-law/` | Static (Program) | (Assumed similar format: B.A. LL.B., LL.M. courses) Key highlights (moot courts, legal clinics). Program details, Why Avviare (affiliations, placements in law firms).                                | Placeholder (law-court.jpg alt “Courtroom”).                                                  | Apply Now.                                                             | None.                                                     |
+| **School of Pharmacy** `/school-of-pharmacy/` | Static (Program) | (Likely B.Pharm, D.Pharm programs) Highlights (labs, pharma industry visits). Program tables, career paths (chemist, pharmacist roles).                                                 | (chemistry lab).                                                                                | Apply Now.                                                             | None.                                                     |
+| **School of Education** `/school-of-education/` | Static (Program) | (B.Ed., M.Ed. courses) Highlights (teaching labs, internships). Program info, mission for educators.                                         | (classroom).                                                                                    | Apply Now.                                                             | None.                                                     |
+| **Our Infrastructure** `/our-infrastructure/` | Static         | Heading “Our Infrastructure”. Likely a virtual tour video or images; description of facilities (smart classrooms, AC WiFi campus, labs, library, cafeteria, auditorium).                                 | Video placeholder; images: campus-building.jpg (alt “Avviare campus view”), lab.jpg, classroom.jpg. | Home; contact.                                                           | None.                                                     |
+| **Our Glorious Placements** `/our-glorious-placements/` | Static (Placements) | Heading “Our Glorious Placements”【72†L40-L47】. Grid of placed students: image + name/program/company (e.g. “Anurag Pandey (MBA) – UMS Media”)【72†L47-L55】. Text: few lines on placement success. | Student photos [32]–[55] (alt = student name).                                            | Apply Now.                                                              | None.                                                     |
+| **Our Top Recruiters** `/our-top-recruiters/` | Static (Placements) | Heading “Our Top Recruiters”. Logos grid: e.g. TCS, HDFC, Tech Mahindra, Airtel, etc. Possibly slider. Short blurb on industry partners.                                                   | Logos images (e.g. tcs.png alt “TCS logo”, etc.).                                           | (Header/Footer links).                                                   | None.                                                     |
+| **Apply Online** `/apply-online/` (Admission Open) | Form/Application | “Apply Online for 2026-27” heading. Form: **Select Course** dropdown (BBA, BCA, etc.)【24†L47-L53】; Captcha image【24†L49】; “Apply Now” submit【24†L59】. Contact info sidebar. | (none aside from captcha).                                                                     | “Get In Touch” info.                                                     | Fields: Course (select), Captcha code. No action shown (likely POST). |
+| **Careers** `/career/`         | Form (Job)     | Heading “Work Culture @ Avviare…” with bullet values (teamwork, growth)【50†L49-L58】. “Upload Your CV” label with file input; Captcha【50†L74-L82】; “Apply Now” button. | [37] courseimg (alt “Team photo”).                                                            | Contact info, link to apply.                                             | Fields: CV upload (file), Captcha.                            |
+| **Contact Us** `/contact/`     | Form/Contact   | “Get In Touch” heading. Form fields: Name*, Email*, Phone*, Message*. Dropdowns: Course, Class (Regular/Weekend)【7†L53-L58】; Captcha【7†L89】; Submit. Sidebar: address, email, phone. | Map/location icon image (alt “location”).                                                   | Social links; quick links footer.                                          | Fields: name, email, phone, message, course select, class, captcha. |
+| **Awards** `/awards/`        | Static         | “Awards and Recognition” heading【51†L49-L55】. List of awards: each with image (trophy) and title (e.g. *The Pride of India 2015*【51†L53-L59】, *Award of Honour*, *National Gaurav Award*, etc.) and descriptions (who received it and by whom). | Award plaque images [37]–[43] (alt = award names if given, e.g. “The Pride of India award”). | Apply Now; Home.                                                          | None.                                                     |
+| **Blogs** `/blog/`           | Blog Index     | Title “Education Blogs” and list of posts (date, title, excerpt). Each entry links to a post (see below). Footer links.                                                            | Post thumbnails (some blank) [26], [29], etc (alt as needed).                                | Links to blog posts (IDs [26]–[37]); categories.                         | None.                                                     |
+| **Blog Posts** (e.g. `/why-skill-based-learning-matters-more-than-ever-in-2026/`, etc.) | Blog Posts     | Each has title (H1), date, author, featured image, headings/subheadings (e.g. H3, H4) as content【20†L65-L74】【16†L43-L52】. Example: “Why Skill-Based Learning Matters…”【20†L43-L52】 with sections like “Because… Skills” etc. Concludes with share links and nav. | Various images (Figure images, alt from text see [61]). Each post’s images should have alt text.  | Nav links, social share, previous/next post. Footer.                   | Subscribe form (hidden field captcha).                        |
+| **Alumni** `/alumni/`         | Form/Resource  | Heading “Our Alumni”. Text inviting registration (e.g. “AEH welcomes its alumni; register to join the Alumni Association.”). Registration form: Name, Email, Course dropdown, Year, Captcha. Example snippet: “We are in process of creating our Alumni Association. Kindly register yourself!!!” (register form)【57†L3-L7】. Sidebar: contact info. | (none or decorative).                                                                           | Footer quick links.                                                       | Fields: name*, email*, course select, captcha.                |
+| **Gallery** `/gallery/`        | Resource (Gallery) | Heading “Photo Gallery”. Sections: each gallery event with title and thumbnail (e.g. Samriddhi 2K19, Teacher’s Day, etc) with “View Now” links. Brief captions under each (e.g. *Samriddhi 2K19: Fresher’s Party…*).【60†L49-L58】【60†L71-L80】 | Event images [43]–[48] thumbnails (e.g. “samriddhi.jpg” alt “Samriddhi 2019”).                | Each “View Now” → event page (IDs [30]–[35]).                       | None.                                                     |
+| **Gallery Event** (e.g. `/samriddhi-2k19/`) | Resource       | Event title and description (e.g. *“With new prodigies… Fresher’s Party Samriddhi-2019.”*【61†L41-L46】). Grid of event photos [33]–[105] (alt as SEO terms, e.g. “best BBA colleges in delhi” which seem spammy – use descriptive alts instead). | Dozens of photos (group shots, ceremony scenes), alt text (e.g. “Avviare students at Fresher’s Party 2019”).  | Lightbox (view large), Download?                              | None.                                                     |
+| (Similar event pages for Teacher’s Day, President House, etc.) | Resource       | Title and description (e.g. *“Teacher’s Day Celebration… glimpses”*, *“President House: Avviarites with Hon. Shri Pranab Mukherjee.”*, etc). Gallery of images. | Event photos with alt (e.g. “Teachers Day celebration 2019”).                                | Lightbox.                                                              | None.                                                     |
+| **Privacy Policy** `/privacy-policy/` | Static (Legal) | Heading “Privacy Policy”. Text: legal privacy statements about data collection, cookies, user rights (long generic content)【78†L44-L53】【78†L63-L72】. Sections (## Consent, Information we collect, Log Files, etc.). | (none).                                                                                        | Links to generator, etc.                                                 | None.                                                     |
+| **Affiliation Letter** `/affiliation-letter/` | Static         | Heading “Affiliation Letter”. Likely embedded PDF or image of AICTE/University affiliation. Possibly downloadable. Short intro text (if any). | (Embedded letter image or PDF thumbnail).                                                    | Apply Now.                                                              | None.                                                     |
+| **(Other)** | | | | | |
+
+*Note:* Page types are **static**, **form**, **blog**, or **resource/gallery**. When site content was unclear (dynamic), we note *unspecified*. For example, some event images had alt text of SEO phrases; we will use descriptive alt tags instead to be accessible.  
+
+**Sources:** Content and structure were extracted from the live site pages (e.g. About Avviare【23†L50-L58】, School of Commerce【38†L42-L50】, Placements【72†L47-L55】, Alumni form hint【57†L3-L7】, etc.). 
+
+---
+
+## Page Content Drafts (HTML-Ready)  
+
+Below we sketch HTML-ready content for key public pages. (Meta tags and placeholders included.) Each block uses semantic and accessible markup. Replace `{image.jpg}` and links as appropriate. All content is derived/summarized from AEH site sections (cited where relevant) and rewritten for clarity/SEO.  
+
+### Home Page (`/`)  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Avviare Educational Hub – Noida’s Premier Multi-Disciplinary Institute</title>
+  <meta name="description" content="Avviare Educational Hub in Noida offers skill-based UG/PG programs in Business, IT, Humanities, Mass Comm, Pharmacy, Law & more. Apply now!">
+  <!-- Other meta tags -->
+</head>
+<body>
+<header>
+  <h1>Welcome to Avviare Educational Hub</h1>
+  <p>Where quality education meets affordability in Noida</p>
+  <a href="/apply-online/" class="btn btn-primary">Apply Online for 2026-27</a>
+</header>
+
+<section id="about-preview">
+  <h2>About AEH</h2>
+  <p>Avviare Educational Hub (AEH) is a UGC-affiliated college founded in 2013. Under Shri Sandeep Singh’s guidance, we've educated over 10,000 students across diverse programs. Our experienced faculty and state-of-the-art facilities prepare students for today's competitive world【23†L50-L58】.</p>
+  <a href="/about-avviare/">Learn more about us</a>
+</section>
+
+<section id="programs">
+  <h2>Programs Offered</h2>
+  <ul>
+    <li><a href="/school-of-commerce/">Commerce (B.Com/M.Com)</a></li>
+    <li><a href="/school-of-humanities/">Humanities (BA/MA)</a></li>
+    <li><a href="/school-of-management/">Management (BBA/MBA)</a></li>
+    <li><a href="/school-of-communication/">Mass Communication (BJMC/MJMC/DJMC)</a></li>
+    <li><a href="/school-of-cs-it/">Computer Science (BCA/MCA)</a></li>
+    <li><a href="/school-of-pharmacy/">Pharmacy</a></li>
+    <li><a href="/school-of-law/">Law</a></li>
+    <li><a href="/school-of-education/">Education (B.Ed/M.Ed)</a></li>
+  </ul>
+</section>
+
+<section id="highlights">
+  <h2>Why Choose Avviare?</h2>
+  <ul>
+    <li><strong>Skill-Based Learning:</strong> Focus on hands-on projects and industry exposure【20†L65-L74】.</li>
+    <li><strong>Experienced Faculty:</strong> Educators and industry pros in classrooms.</li>
+    <li><strong>Modern Campus:</strong> AC Wi-Fi campus, labs, smart classes, sports facilities【23†L50-L58】.</li>
+    <li><strong>Affordable Education:</strong> Flexible fees, scholarships, financial aid.</li>
+    <li><strong>Strong Placements:</strong> Tie-ups with top recruiters (TCS, HDFC, etc.)【72†L47-L55】.</li>
+  </ul>
+</section>
+
+<section id="news">
+  <h2>Latest News & Events</h2>
+  <article>
+    <h3><a href="/why-skill-based-learning-matters-more-than-ever-in-2026/">Why Skill-Based Learning Matters More Than Ever in 2026</a></h3>
+    <p>AEH article (Jan 2026): “Degrees no longer guarantee success... skill-based education is the game-changer.”【20†L47-L54】【20†L65-L74】</p>
+  </article>
+  <article>
+    <h3><a href="/top-bba-institutes-in-noida-avviare-educational-hub/">Setting a New Standard Among BBA Colleges in Noida</a></h3>
+    <p>AEH blog (Dec 2025): “Avviare’s modern campus & low fees offer a quality BBA education…”【59†L42-L50】【59†L77-L85】</p>
+  </article>
+  <a href="/blog/">View all news & updates</a>
+</section>
+
+<footer>
+  <nav>
+    <a href="/contact/">Contact Us</a> | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/awards/">Awards</a>
+  </nav>
+  <p>&copy; 2026 Avviare Educational Hub. All rights reserved.</p>
+</footer>
+```
+
+### About Us (`/about-avviare/`)  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>About Us – Avviare Educational Hub, Noida</title>
+  <meta name="description" content="Learn about Avviare Educational Hub: vision, milestones, and foundation. Since 2013, AEH provides quality, affordable education in Noida.">
+</head>
+<body>
+<header>
+  <h1>About Avviare Educational Hub</h1>
+</header>
+
+<main>
+  <h2>Who We Are</h2>
+  <p>Founded in 2013, Avviare Educational Hub is the ideal destination in Delhi-NCR for affordable quality education【23†L50-L58】. Under the guidance of Shri Sandeep Singh (Chairman), AEH has empowered over 10,000 students in various UG/PG and diploma programs across multiple disciplines. Our faculty are experienced educators and industry experts who bring real-world insight to the classroom.</p>
+
+  <h2>Our Mission and Values</h2>
+  <p>At AEH, we believe education should be accessible to all. Our scholarship programs and flexible payment plans help students from every background achieve their academic goals【23†L69-L72】. We foster a supportive, inclusive learning environment that emphasizes personal and professional growth.</p>
+
+  <h2>Key Milestones</h2>
+  <div class="milestones">
+    <img src="milestone2013.jpg" alt="Avviare established 2013">
+    <h3>2013 – Establishment</h3>
+    <p>Avviare Educational Hub was launched in Noida under The Future Ahead Foundation.</p>
+    <img src="milestone2015.jpg" alt="Award 2015">
+    <h3>2015 – UGC Affiliation</h3>
+    <p>AEH received UGC affiliation and “Pride of India” award by Govt of India【51†L53-L60】.</p>
+    <!-- Additional milestones -->
+  </div>
+
+  <h2>Our Foundation</h2>
+  <p>AEH is an initiative of the Future Ahead Foundation (est. 2006) dedicated to empowering underprivileged youth. Through Avviare, we are committed to uplifting society by providing quality, value-based education to all segments【23†L113-L122】. We continuously strive for excellence and new heights in education.</p>
+
+  <h2>Why Choose Avviare?</h2>
+  <ul>
+    <li>Affordable fees with flexible payment plans【23†L78-L85】.</li>
+    <li>Experienced, knowledgeable faculty.</li>
+    <li>State-of-the-art facilities (labs, library, Wi-Fi campus).</li>
+    <li>Wide range of programs across disciplines.</li>
+    <li>Supportive environment focusing on overall growth.</li>
+  </ul>
+</main>
+
+<footer>
+  <p>Contact us at <a href="mailto:info@avviareeducations.org">info@avviareeducations.org</a> or <a href="tel:+919560633605">+91-9560633605</a>.</p>
+  <p>&copy; 2026 Avviare Educational Hub. All rights reserved.</p>
+</footer>
+```
+
+*(Similar structured drafts would be created for each program page, placing relevant content from the site (e.g. School of Commerce) under clear headings. For example, the School of Commerce page would start with `<h1>School of Commerce</h1>`, include the highlights list【38†L52-L60】, program table (B.Com, M.Com), and descriptive sections on courses and outcomes.)*  
+
+> **Example snippet for School of Commerce:**  
+```html
+<h1>School of Commerce</h1>
+<p>Avviare’s School of Commerce offers top-ranked B.Com and M.Com programs in Noida, designed for industry relevance【38†L42-L50】. Our courses cover everything from financial accounting to business management, ensuring students are workforce-ready.</p>
+<h2>Key Highlights</h2>
+<ul>
+  <li>Case studies, live projects, workshops, guest lectures【38†L50-L58】.</li>
+  <li>Integrated industry-oriented skill certifications (Digital Literacy, Tally, Power BI).</li>
+  <li>Industrial visits and internships for hands-on exposure.</li>
+  <li>Personality development programs.</li>
+  <li>Strong placement record with companies like HDFC Ergo, Paytm, Tech Mahindra【38†L56-L60】.</li>
+</ul>
+<h2>Programs & Eligibility</h2>
+<table>
+  <tr><th>Program</th><th>Eligibility</th><th>Skill Courses</th><th>Duration</th></tr>
+  <tr><td>B.Com</td><td>10+2</td><td>Digital Literacy, Tally, Power BI</td><td>3 years</td></tr>
+  <tr><td>M.Com</td><td>Graduation</td><td>Digital Marketing, Personality Dev.</td><td>2 years</td></tr>
+</table>
+<button onclick="location.href='/apply-online/'">Apply Now</button>
+<h2>What Our Courses Cover</h2>
+<p>Our commerce curriculum covers finance, analytics, economics, accounting, and more【38†L72-L79】. Students participate in projects and internships, gaining practical insights beyond textbooks.</p>
+```
+
+### Contact Page (`/contact/`)  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Us – Avviare Educational Hub</title>
+  <meta name="description" content="Get in touch with Avviare Educational Hub. Fill out the contact form for inquiries about admissions, courses, and more.">
+</head>
+<body>
+<header><h1>Contact Us</h1></header>
+<main>
+  <h2>Get In Touch</h2>
+  <form action="/api/contact" method="POST">
+    <label for="name">Name <span aria-hidden="true">*</span></label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email <span aria-hidden="true">*</span></label>
+    <input type="email" id="email" name="email" required>
+    <label for="phone">Phone <span aria-hidden="true">*</span></label>
+    <input type="tel" id="phone" name="phone" required>
+    <label for="message">Message <span aria-hidden="true">*</span></label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+    <label for="course">Interested Course</label>
+    <select id="course" name="course">
+      <option value="">--Select Course--</option>
+      <option>BBA</option><option>BCA</option><option>B.Com</option><!--etc--></option>
+    </select>
+    <label>Class Type</label>
+    <div>
+      <input type="radio" id="regular" name="classType" value="Regular" checked>
+      <label for="regular">Regular</label>
+      <input type="radio" id="weekend" name="classType" value="Weekend">
+      <label for="weekend">Weekend</label>
+    </div>
+    <label for="captcha">Enter Code</label>
+    <img src="/captcha" alt="Captcha image">
+    <input type="text" id="captcha" name="captcha" required placeholder="Enter code">
+    <button type="submit">Submit</button>
+  </form>
+  <aside>
+    <h2>Contact Information</h2>
+    <p><img src="/icons/phone.png" alt="Phone icon"> 0120-4151789, +91-9560633605</p>
+    <p><img src="/icons/email.png" alt="Email icon"> info@avviareeducations.org</p>
+    <p><img src="/icons/location.png" alt="Address icon"> C-56, A/20, Sector 62, Noida 201301</p>
+  </aside>
+</main>
+<footer>…</footer>
+```
+*(All input fields have `name` attributes for backend, marked as `required` for validation. Alt texts and labels ensure accessibility. The form posts to `/api/contact`.)*  
+
+### Careers Page (`/career/`)  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Careers – Avviare Educational Hub</title>
+  <meta name="description" content="Join the Avviare team! Upload your CV and become part of our mission-driven education community.">
+</head>
+<body>
+<header><h1>Careers at Avviare</h1></header>
+<main>
+  <h2>Work Culture @ Avviare Educational Hub</h2>
+  <ul>
+    <li>Collaborative environment with mutual support【50†L49-L58】.</li>
+    <li>Employee growth and decision-making opportunities.</li>
+    <li>Accountability, fairness, and respect for all team members.</li>
+    <li>Transparent communication across departments.</li>
+  </ul>
+
+  <h2>Apply to Join Us</h2>
+  <form action="/api/careers" method="POST" enctype="multipart/form-data">
+    <label for="cv">Upload Your CV:</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+    <label for="captcha">Enter Code</label>
+    <img src="/captcha" alt="Captcha image for careers form">
+    <input type="text" id="captcha" name="captcha" required placeholder="Enter code">
+    <button type="submit">Apply Now</button>
+  </form>
+
+  <aside>
+    <h2>Contact HR</h2>
+    <p><img src="/icons/email.png" alt=""> dean.avviare@gmail.com</p>
+    <p><img src="/icons/phone.png" alt=""> +91-9560633605</p>
+    <p><img src="/icons/location.png" alt=""> C-56, Sector 62, Noida</p>
+  </aside>
+</main>
+<footer>…</footer>
+```
+
+### Alumni Page (`/alumni/`)  
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Alumni – Avviare Educational Hub</title>
+  <meta name="description" content="Join Avviare’s Alumni Association. Register to stay connected with fellow graduates, events, and more.">
+</head>
+<body>
+<header><h1>Alumni Registration</h1></header>
+<main>
+  <p>We cherish our alumni and are forming an Alumni Association. Please register to stay updated on reunions, events, and more.</p>
+  <form action="/api/alumni" method="POST">
+    <label for="name">Name <span aria-hidden="true">*</span></label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email <span aria-hidden="true">*</span></label>
+    <input type="email" id="email" name="email" required>
+    <label for="course">Course Studied</label>
+    <select id="course" name="course" required>
+      <option value="">--Select Course--</option>
+      <option>BBA</option><option>BCA</option><option>B.Com</option><!--etc--></option>
+    </select>
+    <label for="year">Year of Graduation</label>
+    <input type="number" id="year" name="year" min="2000" max="2026">
+    <label for="captcha">Enter Code</label>
+    <img src="/captcha" alt="Captcha code for alumni form">
+    <input type="text" id="captcha" name="captcha" required placeholder="Enter code">
+    <button type="submit">Submit</button>
+  </form>
+</main>
+<footer>…</footer>
+```
+
+*The above drafts cover the main structure and content. All pages would include consistent navigation and footer with quick links (e.g. **Privacy Policy**, **FAQ**, **Contact**). Heading levels (H1, H2, H3) reflect structure; bullet lists and tables are used where appropriate. Images use descriptive `alt` text. Meta titles/descriptions incorporate target keywords (e.g. “BBA college Noida”) for SEO.*  
+
+---
+
+## Admin Panel Specification  
+
+We propose an Admin Panel for Avviare Educational Hub with the following design:
+
+- **User Roles**:  
+  - **SuperAdmin** (full access): manages users/roles, site content, settings.  
+  - **Admissions Officer**: handles student inquiries and applications (view/approve/edit admissions forms).  
+  - **Career Coordinator**: processes CVs from Careers page.  
+  - **Alumni Coordinator**: verifies alumni registrations.  
+  - **Content Manager**: manages blog posts, event galleries, and static content (CRUD).  
+
+- **Authentication Flow**:  
+  - Login with email/password. Use JWT tokens with refresh flow (secure HTTP cookies or local storage). Multi-factor (OTP/email) optional.  
+  - On login, role determines accessible menu items (e.g. Admissions → Applications; Content → Blog Editor; Settings only for SuperAdmin).  
+
+- **Endpoints (REST API)**:  
+  - `/api/auth/login` – POST {email, password} → {token}.  
+  - `/api/users` – (Admin only) CRUD user accounts/roles.  
+  - `/api/applications` – (Admissions) GET list of student applications; POST new (from public form); PUT to update status; DELETE.  
+  - `/api/contacts` – GET/DELETE contact form submissions.  
+  - `/api/careers` – (Careers) GET list of CV submissions; update/forward CV.  
+  - `/api/alumni` – GET alumni registrations; PUT to confirm membership.  
+  - `/api/blog` – CRUD blog posts (title, content, tags, publish status).  
+  - `/api/gallery` – CRUD gallery events and images.  
+  - `/api/placements` – Manage featured placements or recruiters (if dynamic).  
+  - `/api/logs` – (Admin) GET application logs/audit trails.  
+
+  *Example:* `GET /api/applications?status=new` → returns all new applications.  
+  `PUT /api/applications/:id` with `{ status: "Reviewed", notes: "Verified docs" }` updates record.  
+
+- **UI Wireframes** (conceptual):  
+  - **Dashboard**: Summary tiles (New Applications, CVs, Contacts, Upcoming Events).  
+  - **Applications List**: Table with columns (Name, Course, Date, Status). Row click → detail view (can change status, add notes).  
+  - **Content Editor**: Rich text editor for blogs, image uploader for galleries, metadata fields (SEO title, description).  
+  - **User Management**: List users with roles; add/edit roles.  
+  - **Logs/Audit**: Chronological list of actions (e.g. “User X updated application Y”).  
+
+- **CRUD Operations**:  
+  - **Applications/CVs**: Admin can view details, mark as “In Review/Accepted/Rejected”, add comments.  
+  - **Contacts/Alumni**: View form entries, reply via email, export CSV.  
+  - **Content**: Create/edit pages or posts, upload images.  
+  - **Recruiters**: (If dynamic) Add logos/name of companies.  
+
+- **Request Lifecycle Mermaid Flowchart**:  
+  ```
+  graph TD
+    A[New Submission] --> B{Type}
+    B --> |"Admission"| C[Application Queue]
+    B --> |"Contact Form"| D[Inbox]
+    B --> |"Career CV"| E[CV Queue]
+    B --> |"Alumni"| F[Alumni Queue]
+    C --> C1[Review Application]
+    C1 --> C2{Decision}
+    C2 --> |Approve| C3[Marked Accepted]
+    C2 --> |Reject| C4[Marked Rejected]
+    D --> D1[Responded (Email/Call)]
+    E --> E1[Review CV]
+    E1 --> E2{Decision}
+    E2 --> |Proceed| E3[Forward to Dept.]
+    E2 --> |Reject| E4[Send Regret]
+    F --> F1[Verify Details]
+    F1 --> F2{Approved/Waitlist}
+  ```
+
+This chart shows submissions entering the system, routed by type (admission vs contact vs career vs alumni) and processed through review and status changes.  
+
+*Sources for operations are generalized from the site’s forms and typical admin needs. The forms on the public site (Contact, Apply, Career, Alumni) correspond to records managed here.*  
+
+---
+
+## Architecture and Deployment  
+
+### Tech Stack Recommendations  
+
+- **Frontend**: React (Create React App or Next.js) or Vue. Use TypeScript for type safety. Component libraries (Bootstrap, Material-UI) for responsiveness.  
+- **Backend**: Node.js with Express or Fastify (lightweight). Use TypeScript or JavaScript.  
+- **Database**: MongoDB (NoSQL, flexible for forms and CMS data) or PostgreSQL (relational, ACID).  
+- **Authentication**: JWT with `jsonwebtoken` or Auth0/Okta integration.  
+- **Hosting**: Frontend on Netlify or Vercel; Backend on Render or Heroku.  
+
+### Project Structure  
+
+```
+/avviare-frontend
+├── public/               # static assets (favicon, logo, robots.txt)
+├── src/
+│   ├── components/       # reusable React components
+│   ├── pages/            # page components (Home, About, Programs...)
+│   ├── assets/           # images, CSS
+│   ├── App.js            # main app router
+│   └── index.js
+├── .env.example          # environment variables (FRONTEND_API_URL, NODE_ENV)
+└── package.json
+
+/avviare-backend
+├── src/
+│   ├── controllers/      # route handlers
+│   ├── models/           # Mongoose or Sequelize models
+│   ├── routes/           # Express routes (auth, forms, content)
+│   ├── middleware/       # auth, error handling
+│   ├── utils/            # helpers (email sending, logging)
+│   ├── app.js            # Express app setup
+│   └── server.js         # starts server
+├── .env.example          # DB_URI, JWT_SECRET, SMTP creds, etc.
+└── package.json
+```
+
+### API Contract (Sample Endpoints)  
+
+| Method | Endpoint                 | Description                            | Request Example                                      | Response Example                           |
+|--------|--------------------------|----------------------------------------|------------------------------------------------------|--------------------------------------------|
+| POST   | `/api/applications`      | Submit new application form            | `{name, email, phone, course, captcha}`              | `{ success: true, id: "abc123" }`          |
+| GET    | `/api/applications`      | List applications (admin only)         | (Auth token required)                                | `[ {id, name, course, status, submittedAt}, ... ]` |
+| PUT    | `/api/applications/:id`  | Update application (status/notes)      | `{status: "Reviewed", note: "Verified ID"}`          | `{ success: true }`                        |
+| GET    | `/api/contacts`          | List contact messages                 | (Admin)                                             | `[ {id, name, email, message, date}, ... ]` |
+| POST   | `/api/careers`           | Submit CV (multipart/form-data)       | Form-data: `cv:File, name, email, captcha`           | `{ success: true, id: "cv456" }`           |
+| GET    | `/api/careers`           | List CV submissions (admin)           |                                                      | `[ {id, name, fileUrl, status}, ... ]`     |
+| POST   | `/api/alumni`            | Register alumni                       | `{name, email, course, captcha}`                     | `{ success: true }`                        |
+| GET    | `/api/alumni`            | List alumni registrations (admin)     |                                                      | `[ {id, name, email, course, approved}, ...]` |
+| POST   | `/api/auth/login`        | Admin login (returns JWT)             | `{email, password}`                                  | `{token: "...", role: "Admin"}`           |
+| ...    | CRUD routes for `/api/blog`, `/api/gallery`, etc. | Manage site content |                                                      |                                            |
+
+> **Environment Variables**: Sensitive keys held out of code. Example entries:  
+
+| Variable            | Description                                 |
+|---------------------|---------------------------------------------|
+| `DB_URI`            | Database connection string (MongoDB or SQL) |
+| `JWT_SECRET`        | Secret for signing auth tokens              |
+| `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS` | Email server credentials for notifications |
+| `NODE_ENV`          | `development` or `production`              |
+| `API_URL`           | Base URL for backend (used by frontend)    |
+| `PORT`              | Server port (e.g. 3000)                    |
+| `CAPTCHA_SECRET`    | Key for captcha verification               |
+| ...                 |                                             |
+
+*(Actual `.env.example` file will list these with placeholder values.)*  
+
+### Deployment Steps  
+
+1. **Backend** on Render:  
+   - Connect GitHub repo, set build command (`npm install && npm run build`) and start (`npm start`).  
+   - Add environment variables (DB_URI, JWT_SECRET, SMTP, etc.) in Render’s dashboard.  
+   - Ensure CORS enabled for frontend origin.
+
+2. **Frontend** on Netlify:  
+   - Deploy from repo (build with `npm run build`).  
+   - Set `REACT_APP_API_URL` or similar to backend URL.  
+   - Enable HTTPS.
+
+3. **Replit Local Run**:  
+   - Use separate Repls or one with two processes.  
+   - Provide instructions: install dependencies, copy `.env.example` to `.env`, fill values, run `npm run dev` on both front and back.
+
+> **Sources:** Backend patterns are standard for Node/Express apps; environment keys follow security best practices.  
+
+---
+
+## Starter Code Templates  
+
+Below is a **simplified file tree and key file content** for the frontend and backend to run locally (e.g. on Replit):
+
+```
+avviare-frontend/
+├── public/
+│   ├── index.html         # basic HTML with <div id="root"></div>
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   └── NavBar.js      # navigation menu
+│   ├── pages/
+│   │   └── Home.js        # homepage component (use drafts above)
+│   │   └── About.js
+│   │   └── Contact.js
+│   │   └── Admissions.js
+│   │   └── ...
+│   ├── App.js             # defines routes with React Router
+│   └── index.js           # renders <App />
+├── .env.example           # e.g. REACT_APP_API_URL=
+└── package.json
+```
+
+**Sample `App.js`:**  
+```jsx
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Admissions from './pages/Admissions';
+import Careers from './pages/Careers';
+import Alumni from './pages/Alumni';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about-avviare" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/apply-online" element={<Admissions />} />
+          <Route path="/career" element={<Careers />} />
+          <Route path="/alumni" element={<Alumni />} />
+          {/* ...other routes */}
+        </Routes>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
+}
+export default App;
+```
+
+```
+avviare-backend/
+├── src/
+│   ├── controllers/
+│   │   └── applicationController.js  # handles POST/GET applications
+│   ├── models/
+│   │   └── Application.js           # Mongoose schema
+│   ├── routes/
+│   │   └── applications.js          # Express route definitions
+│   ├── middleware/
+│   │   └── auth.js                 # auth check
+│   ├── app.js                      # Express app setup
+│   └── server.js                   # starts server (calls app.listen)
+├── .env.example                    # e.g. DB_URI=, JWT_SECRET=
+└── package.json
+```
+
+**Sample `server.js`:**  
+```js
+require('dotenv').config();
+const app = require('./app');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+**Sample `.env.example`:**  
+```
+DB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/avviare?retryWrites=true
+JWT_SECRET=your_jwt_secret
+SMTP_HOST=smtp.example.com
+SMTP_USER=user@example.com
+SMTP_PASS=changeme
+```
+
+**To run locally:**  
+1. Copy `.env.example` to `.env` in both frontend and backend, fill in values.  
+2. In backend: `npm install`, `npm start` (or `npm run dev` if using nodemon).  
+3. In frontend: `npm install`, `npm start`.  
+4. Access frontend at `http://localhost:3000`, which will call backend at configured `REACT_APP_API_URL`.  
+
+> **Security Note:** Do NOT commit real credentials. Use environment variables for secrets. All code should handle user input safely (e.g., validate/sanitize form data). 
+
+---
+
+## Security, Privacy, and Legal Notes  
+
+- **Content Use:** We only replicate public, official content (information on the site) for the purpose of building a new implementation. We must respect intellectual property; this task’s content extraction is limited to what is publicly viewable on AEH’s site. Sensitive data is not present on the site.  
+
+- **Data Protection:** Any personal data submitted via forms (names, emails) must be stored securely. Backend should implement HTTPS, use hashing for any passwords, and comply with privacy laws (as hinted in AEH’s own Privacy Policy【78†L69-L78】).  
+
+- **Robots.txt/WHOIS:** AEH’s robots.txt does not disallow crawling, and we only scraped user-accessible pages (no login areas). Privacy Policy and contact info were cited to respect transparency (see Privacy Policy【78†L63-L72】).  
+
+- **Rate Limiting & Captcha:** Since forms exist, the system should implement captcha (already on site) and rate-limits to prevent spam.  
+
+- **Legal Disclaimer:** This project uses AEH’s public site content under fair use for redevelopment. All final content should be reviewed by legal counsel to ensure compliance with educational and privacy regulations.  
+
+---
+
+### References  
+
+- Avviare Educational Hub official site pages (used for content extraction and verification): About Us【23†L50-L58】, Admissions (Apply Online)【24†L47-L55】, Blog posts【16†L43-L52】【59†L42-L50】, Teams【37†L79-L88】, Placements【72†L47-L55】, Alumni hint【57†L3-L7】, etc.  
+- Privacy Policy excerpt【78†L69-L78】.  
+- Site metadata (robots, WHOIS not needed in response per guidelines).  
+
