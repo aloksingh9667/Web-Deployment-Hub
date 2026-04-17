@@ -58,7 +58,12 @@ export default function StudentLogin() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-sm font-medium text-gray-700">Password</label>
+                    <Link href="/student/forgot-password" className="text-xs text-[hsl(219,40%,40%)] hover:underline">
+                      Forgot password?
+                    </Link>
+                  </div>
                   <div className="relative">
                     <input
                       type={showPwd ? "text" : "password"}
@@ -85,11 +90,6 @@ export default function StudentLogin() {
                 <p className="text-sm text-gray-600">
                   New student?{" "}
                   <Link href="/student/register" className="text-[hsl(219,40%,40%)] font-semibold hover:underline">Register here</Link>
-                </p>
-              </div>
-              <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-xs text-amber-700 text-center">
-                  For login credentials, contact the admissions office or check your welcome email.
                 </p>
               </div>
             </div>

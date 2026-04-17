@@ -75,6 +75,6 @@ externalPort = 3001
 [userenv]
 
 [userenv.shared]
-RAZORPAY_KEY_ID = "rzp_test_PLACEHOLDER_REPLACE"
-RAZORPAY_KEY_SECRET = "PLACEHOLDER_REPLACE_WITH_SECRET"
+RAZORPAY_KEY_ID = "rzp_test_SeZoyMeUuq0m2d"
+RAZORPAY_KEY_SECRET = "AiHHxTm618lFnuot5UkFuawd"
 RAZORPAY_MODE = "test"

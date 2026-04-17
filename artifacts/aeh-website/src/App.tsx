@@ -48,6 +48,8 @@ import StudentRegister from "@/pages/student/StudentRegister";
 import StudentDashboard from "@/pages/student/StudentDashboard";
 import StudentFees from "@/pages/student/StudentFees";
 import StudentReceipts from "@/pages/student/StudentReceipts";
+import StudentForgotPassword from "@/pages/student/StudentForgotPassword";
+import AdminCreate from "@/pages/admin/AdminCreate";
 
 setBaseUrl(import.meta.env.VITE_API_URL || null);
 setAuthTokenGetter(() => localStorage.getItem("aeh_admin_token"));
@@ -108,11 +110,13 @@ function Router() {
 
       <Route path="/student/login" component={StudentLogin} />
       <Route path="/student/register" component={StudentRegister} />
+      <Route path="/student/forgot-password" component={StudentForgotPassword} />
       <Route path="/student/dashboard" component={StudentDashboard} />
       <Route path="/student/fees" component={StudentFees} />
       <Route path="/student/receipts" component={StudentReceipts} />
 
       <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/create" component={AdminCreate} />
       <Route path="/admin" component={() => <ProtectedRoute component={AdminDashboard} />} />
       <Route path="/admin/applications" component={() => <ProtectedRoute component={AdminApplications} />} />
       <Route path="/admin/contacts" component={() => <ProtectedRoute component={AdminContacts} />} />

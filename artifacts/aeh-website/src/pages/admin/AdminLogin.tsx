@@ -3,7 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAdminLogin } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, Lock, User } from "lucide-react";
+import { GraduationCap, Lock, User, UserPlus } from "lucide-react";
+import { Link } from "wouter";
 
 const schema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -67,8 +68,11 @@ export default function AdminLogin() {
           <button data-testid="button-login" type="submit" disabled={loginMutation.isPending} className="w-full bg-[hsl(219,60%,28%)] text-white font-bold py-3 rounded-lg hover:bg-[hsl(219,60%,22%)] transition-colors disabled:opacity-50">
             {loginMutation.isPending ? "Signing in..." : "Sign In"}
           </button>
-          <div className="text-xs text-center text-muted-foreground pt-2 border-t">
-            Default credentials: <span className="font-mono font-semibold">admin / admin123</span>
+          <div className="pt-2 border-t text-center">
+            <Link href="/admin/create" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <UserPlus className="h-4 w-4" />
+              Create New Admin Account
+            </Link>
           </div>
         </form>
       </div>
