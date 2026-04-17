@@ -2,14 +2,28 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useListContacts } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight, Mail, Phone } from "lucide-react";
+import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight, Mail, Phone, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 export default function AdminContacts() {
-  const { user, logout } = useAuth();
+  const { user, logout, token } = useAuth();
+  const { toast } = useToast();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = useListContacts({ page, limit: 20, search: search || undefined });
+  const { data, isLoading, refetch } = useListContacts({ page, limit: 20, search: search || undefined });
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Delete inquiry from "${name}"?`)) return;
+    const r = await fetch(`${API_BASE}/contacts/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) { toast({ title: "Inquiry deleted" }); refetch(); }
+    else toast({ title: "Failed to delete", variant: "destructive" });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,11 +69,16 @@ export default function AdminContacts() {
                     <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Phone className="h-3.5 w-3.5" />{contact.phone}</span>
                   </div>
                 </div>
-                {contact.course && (
-                  <span className="bg-[hsl(219,60%,28%)]/10 text-[hsl(219,60%,28%)] text-xs font-semibold px-3 py-1 rounded-full">
-                    {contact.course} {contact.classType ? `(${contact.classType})` : ""}
-                  </span>
-                )}
+                <div className="flex items-start gap-2">
+                  {contact.course && (
+                    <span className="bg-[hsl(219,60%,28%)]/10 text-[hsl(219,60%,28%)] text-xs font-semibold px-3 py-1 rounded-full">
+                      {contact.course} {contact.classType ? `(${contact.classType})` : ""}
+                    </span>
+                  )}
+                  <button onClick={() => handleDelete(contact.id, contact.name)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{contact.message}</p>
             </div>

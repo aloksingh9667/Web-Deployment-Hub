@@ -67,3 +67,14 @@ externalPort = 80
 [[ports]]
 localPort = 21165
 externalPort = 3000
+
+[[ports]]
+localPort = 21166
+externalPort = 3001
+
+[userenv]
+
+[userenv.shared]
+RAZORPAY_KEY_ID = "rzp_test_PLACEHOLDER_REPLACE"
+RAZORPAY_KEY_SECRET = "PLACEHOLDER_REPLACE_WITH_SECRET"
+RAZORPAY_MODE = "test"

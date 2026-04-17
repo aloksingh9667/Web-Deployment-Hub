@@ -87,6 +87,19 @@ router.patch("/:id", requireAuth, async (req, res) => {
   }
 });
 
+router.delete("/:id", requireAuth, async (req, res) => {
+  const id = Number(req.params.id);
+  if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
+  try {
+    const [deleted] = await db.delete(contactsTable).where(eq(contactsTable.id, id)).returning();
+    if (!deleted) { res.status(404).json({ error: "Contact not found" }); return; }
+    res.json({ success: true });
+  } catch (err) {
+    req.log.error({ err }, "Delete contact error");
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 function mapContact(c: typeof contactsTable.$inferSelect) {
   return {
     id: c.id,

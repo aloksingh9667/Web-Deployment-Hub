@@ -111,6 +111,19 @@ router.patch("/:id", requireAuth, async (req, res) => {
   }
 });
 
+router.delete("/:id", requireAuth, async (req, res) => {
+  const id = Number(req.params.id);
+  if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
+  try {
+    const [deleted] = await db.delete(applicationsTable).where(eq(applicationsTable.id, id)).returning();
+    if (!deleted) { res.status(404).json({ error: "Application not found" }); return; }
+    res.json({ success: true });
+  } catch (err) {
+    req.log.error({ err }, "Delete application error");
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 function mapApplication(a: typeof applicationsTable.$inferSelect) {
   return {
     id: a.id,

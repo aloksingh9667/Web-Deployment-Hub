@@ -98,8 +98,8 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href="/school-of-pharmacy" className="inline-flex items-center gap-2 border-2 border-[hsl(219,60%,28%)] text-[hsl(219,60%,28%)] font-semibold px-6 py-2.5 rounded-lg hover:bg-[hsl(219,60%,28%)] hover:text-white transition-colors">
-              View All Programs <ChevronRight className="h-4 w-4" />
+            <Link href="/apply" className="inline-flex items-center gap-2 border-2 border-[hsl(219,60%,28%)] text-[hsl(219,60%,28%)] font-semibold px-6 py-2.5 rounded-lg hover:bg-[hsl(219,60%,28%)] hover:text-white transition-colors">
+              View All Programs & Apply <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useGetDashboardStats, useListApplications, useListContacts } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, Users, Briefcase, PhoneCall, LogOut, BarChart2, ChevronRight } from "lucide-react";
+import { GraduationCap, Users, Briefcase, PhoneCall, LogOut, BarChart2, ChevronRight, BookOpen, IndianRupee, Receipt, UserSquare } from "lucide-react";
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
@@ -92,20 +92,40 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="mt-6 grid sm:grid-cols-3 gap-4">
-          {[
-            { href: "/admin/applications", label: "Manage Applications", icon: Users },
-            { href: "/admin/contacts", label: "Manage Inquiries", icon: PhoneCall },
-            { href: "/admin/careers", label: "Manage Career Applications", icon: Briefcase },
-          ].map(({ href, label, icon: Icon }) => (
-            <Link key={href} href={href} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-[hsl(219,60%,28%)] transition-all">
-              <div className="h-10 w-10 bg-[hsl(219,60%,28%)]/10 rounded-xl flex items-center justify-center">
-                <Icon className="h-5 w-5 text-[hsl(219,60%,28%)]" />
-              </div>
-              <span className="font-medium text-foreground">{label}</span>
-              <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto" />
-            </Link>
-          ))}
+        <div className="mt-6">
+          <h2 className="text-base font-semibold text-foreground mb-3">Admissions & Communications</h2>
+          <div className="grid sm:grid-cols-3 gap-4 mb-6">
+            {[
+              { href: "/admin/applications", label: "Manage Applications", icon: Users },
+              { href: "/admin/contacts", label: "Manage Inquiries", icon: PhoneCall },
+              { href: "/admin/careers", label: "Career Applications", icon: Briefcase },
+            ].map(({ href, label, icon: Icon }) => (
+              <Link key={href} href={href} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-[hsl(219,60%,28%)] transition-all">
+                <div className="h-10 w-10 bg-[hsl(219,60%,28%)]/10 rounded-xl flex items-center justify-center">
+                  <Icon className="h-5 w-5 text-[hsl(219,60%,28%)]" />
+                </div>
+                <span className="font-medium text-foreground">{label}</span>
+                <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto" />
+              </Link>
+            ))}
+          </div>
+          <h2 className="text-base font-semibold text-foreground mb-3">Student & Academic Management</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { href: "/admin/students", label: "Manage Students", icon: UserSquare, color: "bg-green-50 text-green-700" },
+              { href: "/admin/courses", label: "Manage Courses", icon: BookOpen, color: "bg-purple-50 text-purple-700" },
+              { href: "/admin/fee-structures", label: "Fee Structures", icon: IndianRupee, color: "bg-orange-50 text-orange-700" },
+              { href: "/admin/payments", label: "Fee Payments", icon: Receipt, color: "bg-blue-50 text-blue-700" },
+            ].map(({ href, label, icon: Icon, color }) => (
+              <Link key={href} href={href} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:shadow-md hover:border-[hsl(219,60%,28%)] transition-all">
+                <div className={`h-10 w-10 ${color} rounded-xl flex items-center justify-center`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+                <span className="font-medium text-foreground text-sm">{label}</span>
+                <ChevronRight className="h-4 w-4 text-muted-foreground ml-auto" />
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
     </div>

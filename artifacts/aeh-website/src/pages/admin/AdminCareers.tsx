@@ -2,14 +2,28 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useListCareers } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight, Mail, Phone, ExternalLink } from "lucide-react";
+import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight, Mail, Phone, ExternalLink, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 export default function AdminCareers() {
-  const { user, logout } = useAuth();
+  const { user, logout, token } = useAuth();
+  const { toast } = useToast();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const { data, isLoading } = useListCareers({ page, limit: 20, search: search || undefined });
+  const { data, isLoading, refetch } = useListCareers({ page, limit: 20, search: search || undefined });
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Delete career application from "${name}"?`)) return;
+    const r = await fetch(`${API_BASE}/careers/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) { toast({ title: "Career application deleted" }); refetch(); }
+    else toast({ title: "Failed to delete", variant: "destructive" });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -49,13 +63,14 @@ export default function AdminCareers() {
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Contact</th>
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Position</th>
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">CV</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {isLoading ? (
-                  <tr><td colSpan={4} className="text-center py-10 text-muted-foreground">Loading...</td></tr>
+                  <tr><td colSpan={5} className="text-center py-10 text-muted-foreground">Loading...</td></tr>
                 ) : data?.data?.length === 0 ? (
-                  <tr><td colSpan={4} className="text-center py-10 text-muted-foreground">No career applications found</td></tr>
+                  <tr><td colSpan={5} className="text-center py-10 text-muted-foreground">No career applications found</td></tr>
                 ) : data?.data?.map((career: any) => (
                   <tr key={career.id} className="hover:bg-muted/20">
                     <td className="px-4 py-3">
@@ -74,6 +89,11 @@ export default function AdminCareers() {
                       ) : (
                         <span className="text-muted-foreground text-xs">Not provided</span>
                       )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <button onClick={() => handleDelete(career.id, career.name)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
                     </td>
                   </tr>
                 ))}

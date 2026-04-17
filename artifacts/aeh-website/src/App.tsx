@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/lib/auth";
+import { StudentAuthProvider } from "@/lib/studentAuth";
 import { setBaseUrl, setAuthTokenGetter } from "@workspace/api-client-react";
 import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -37,6 +38,16 @@ import AdminDashboard from "@/pages/admin/AdminDashboard";
 import AdminApplications from "@/pages/admin/AdminApplications";
 import AdminContacts from "@/pages/admin/AdminContacts";
 import AdminCareers from "@/pages/admin/AdminCareers";
+import AdminCourses from "@/pages/admin/AdminCourses";
+import AdminFeeStructures from "@/pages/admin/AdminFeeStructures";
+import AdminStudents from "@/pages/admin/AdminStudents";
+import AdminPayments from "@/pages/admin/AdminPayments";
+
+import StudentLogin from "@/pages/student/StudentLogin";
+import StudentRegister from "@/pages/student/StudentRegister";
+import StudentDashboard from "@/pages/student/StudentDashboard";
+import StudentFees from "@/pages/student/StudentFees";
+import StudentReceipts from "@/pages/student/StudentReceipts";
 
 setBaseUrl(import.meta.env.VITE_API_URL || null);
 setAuthTokenGetter(() => localStorage.getItem("aeh_admin_token"));
@@ -95,11 +106,21 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/careers" component={Careers} />
 
+      <Route path="/student/login" component={StudentLogin} />
+      <Route path="/student/register" component={StudentRegister} />
+      <Route path="/student/dashboard" component={StudentDashboard} />
+      <Route path="/student/fees" component={StudentFees} />
+      <Route path="/student/receipts" component={StudentReceipts} />
+
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={() => <ProtectedRoute component={AdminDashboard} />} />
       <Route path="/admin/applications" component={() => <ProtectedRoute component={AdminApplications} />} />
       <Route path="/admin/contacts" component={() => <ProtectedRoute component={AdminContacts} />} />
       <Route path="/admin/careers" component={() => <ProtectedRoute component={AdminCareers} />} />
+      <Route path="/admin/courses" component={() => <ProtectedRoute component={AdminCourses} />} />
+      <Route path="/admin/fee-structures" component={() => <ProtectedRoute component={AdminFeeStructures} />} />
+      <Route path="/admin/students" component={() => <ProtectedRoute component={AdminStudents} />} />
+      <Route path="/admin/payments" component={() => <ProtectedRoute component={AdminPayments} />} />
 
       <Route component={NotFound} />
     </Switch>
@@ -111,10 +132,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
         <AuthProvider>
-          <TooltipProvider>
-            <Router />
-            <Toaster />
-          </TooltipProvider>
+          <StudentAuthProvider>
+            <TooltipProvider>
+              <Router />
+              <Toaster />
+            </TooltipProvider>
+          </StudentAuthProvider>
         </AuthProvider>
       </WouterRouter>
     </QueryClientProvider>

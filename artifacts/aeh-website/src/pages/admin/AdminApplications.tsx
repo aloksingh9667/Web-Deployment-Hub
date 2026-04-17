@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { useListApplications, useUpdateApplicationStatus } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { GraduationCap, LogOut, ArrowLeft, Search, ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 const statusColors: Record<string, string> = {
   pending: "bg-amber-100 text-amber-700",
@@ -13,7 +15,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function AdminApplications() {
-  const { user, logout } = useAuth();
+  const { user, logout, token } = useAuth();
   const { toast } = useToast();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -21,6 +23,16 @@ export default function AdminApplications() {
 
   const { data, isLoading, refetch } = useListApplications({ page, limit: 20, search: search || undefined, status: statusFilter as "pending" | "reviewed" | "accepted" | "rejected" || undefined });
   const updateStatus = useUpdateApplicationStatus();
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Delete application from "${name}"?`)) return;
+    const r = await fetch(`${API_BASE}/applications/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (r.ok) { toast({ title: "Application deleted" }); refetch(); }
+    else toast({ title: "Failed to delete", variant: "destructive" });
+  };
 
   const handleStatusChange = (id: string, status: string) => {
     updateStatus.mutate(
@@ -80,6 +92,7 @@ export default function AdminApplications() {
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Class</th>
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Status</th>
                   <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">Action</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -115,6 +128,11 @@ export default function AdminApplications() {
                         <option value="accepted">Accepted</option>
                         <option value="rejected">Rejected</option>
                       </select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <button onClick={() => handleDelete(app.id, app.name)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
                     </td>
                   </tr>
                 ))}
