@@ -4,17 +4,24 @@ export default function Commerce() {
   return (
     <SchoolPage
       name="School of Commerce"
-      tagline="Foundation for finance, business, and economic excellence"
+      tagline="Building the financial leaders and business professionals of tomorrow"
       color="bg-gradient-to-br from-teal-700 to-teal-900"
-      intro="The School of Commerce offers comprehensive B.Com and M.Com programs that build a strong foundation in accounting, finance, taxation, and business law. Our curriculum integrates traditional commerce education with modern financial tools and technologies, preparing graduates for professional certifications and corporate careers."
+      image="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80"
+      stats={[
+        { value: "92%", label: "Placement Rate" },
+        { value: "5", label: "Programs Offered" },
+        { value: "₹4.5L", label: "Avg Package" },
+        { value: "200+", label: "Students Enrolled" },
+      ]}
+      intro="The School of Commerce offers comprehensive B.Com and M.Com programs that build a strong foundation in accounting, finance, taxation, and business law. Our curriculum integrates traditional commerce education with modern financial tools and technologies, preparing graduates for professional certifications such as CA, CMA, and corporate careers in banking, audit, and finance."
       highlights={[
-        "Tally, GST, and income tax software training",
-        "CA and CMA foundation coaching",
-        "Finance and accounting internships",
-        "Guest lectures by chartered accountants",
-        "Commerce club activities and competitions",
-        "Stock market and investment simulation",
-        "Banking and insurance sector projects",
+        "Tally ERP, GST & income tax software training",
+        "CA and CMA foundation coaching support",
+        "Finance and accounting industry internships",
+        "Guest lectures by Chartered Accountants",
+        "Commerce club activities & competitions",
+        "Stock market & investment simulation lab",
+        "Banking and insurance sector live projects",
         "Entrepreneurship development workshops",
       ]}
       programs={[
@@ -25,14 +32,14 @@ export default function Commerce() {
         { name: "M.Com (Finance & Taxation)", duration: "2 Years", eligibility: "B.Com or equivalent (Min 50%)" },
       ]}
       whyChoose={[
-        "CA/CMA exam preparation support",
-        "Practical Tally and GST training",
-        "Industry visits to financial institutions",
-        "Commerce alumni mentorship",
+        "CA/CMA exam preparation support built into curriculum",
+        "Practical Tally ERP 9 and GST training from day one",
+        "Industry visits to banks and financial institutions",
+        "Commerce alumni mentorship network",
         "Access to SEBI-registered trading simulators",
-        "Robust placement in banking sector",
+        "Strong placement in banking and consulting sector",
       ]}
-      careers={["Chartered Accountant", "Cost Accountant", "Financial Analyst", "Bank Officer", "Tax Consultant", "Auditor", "Finance Manager", "Investment Advisor"]}
+      careers={["Chartered Accountant", "Cost Accountant", "Financial Analyst", "Bank Officer", "Tax Consultant", "Auditor", "Finance Manager", "Investment Advisor", "GST Practitioner", "Company Secretary"]}
     />
   );
 }

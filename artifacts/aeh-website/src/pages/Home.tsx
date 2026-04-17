@@ -12,15 +12,15 @@ const stats = [
 ];
 
 const programs = [
-  { name: "School of Management", courses: "BBA, MBA", desc: "Industry-focused curriculum with case studies and live projects", href: "/school-of-management", color: "from-blue-600 to-blue-800", icon: "📊" },
-  { name: "School of CS & IT", courses: "BCA, MCA", desc: "Cutting-edge technology education with AI and programming labs", href: "/school-of-cs-it", color: "from-indigo-600 to-indigo-800", icon: "💻" },
-  { name: "School of Commerce", courses: "B.Com, M.Com", desc: "Comprehensive commerce education with finance specializations", href: "/school-of-commerce", color: "from-teal-600 to-teal-800", icon: "📈" },
-  { name: "School of Humanities", courses: "BA, MA", desc: "Liberal arts education fostering critical thinking and creativity", href: "/school-of-humanities", color: "from-purple-600 to-purple-800", icon: "🎭" },
-  { name: "School of Communication", courses: "DJMC, BJMC, MJMC", desc: "State-of-the-art media studio with industry internships", href: "/school-of-communication", color: "from-rose-600 to-rose-800", icon: "📺" },
-  { name: "School of Law", courses: "BA LL.B, LL.M", desc: "Legal education with moot courts and clinical programs", href: "/school-of-law", color: "from-amber-600 to-amber-800", icon: "⚖️" },
-  { name: "School of Pharmacy", courses: "B.Pharm, D.Pharm", desc: "Pharmaceutical sciences with modern lab infrastructure", href: "/school-of-pharmacy", color: "from-green-600 to-green-800", icon: "💊" },
-  { name: "School of Education", courses: "B.Ed, M.Ed", desc: "Training future educators with modern pedagogical approaches", href: "/school-of-education", color: "from-cyan-600 to-cyan-800", icon: "🎓" },
-  { name: "School of Applied Science", courses: "B.Sc, M.Sc", desc: "Pure and applied sciences with research-oriented curriculum", href: "/school-of-applied-science", color: "from-orange-600 to-orange-800", icon: "🔬" },
+  { name: "School of Management", courses: "BBA, MBA", desc: "Industry-focused curriculum with case studies and live projects", href: "/school-of-management", color: "from-blue-800/90 to-blue-950/95", icon: "📊", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=70" },
+  { name: "School of CS & IT", courses: "BCA, MCA", desc: "Cutting-edge technology education with AI and programming labs", href: "/school-of-cs-it", color: "from-indigo-800/90 to-indigo-950/95", icon: "💻", img: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=600&q=70" },
+  { name: "School of Commerce", courses: "B.Com, M.Com", desc: "Comprehensive commerce education with finance specializations", href: "/school-of-commerce", color: "from-teal-700/90 to-teal-950/95", icon: "📈", img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=70" },
+  { name: "School of Humanities", courses: "BA, MA", desc: "Liberal arts education fostering critical thinking and creativity", href: "/school-of-humanities", color: "from-purple-800/90 to-purple-950/95", icon: "🎭", img: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=600&q=70" },
+  { name: "School of Communication", courses: "DJMC, BJMC, MJMC", desc: "State-of-the-art media studio with industry internships", href: "/school-of-communication", color: "from-rose-700/90 to-rose-950/95", icon: "📺", img: "https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?w=600&q=70" },
+  { name: "School of Law", courses: "BA LL.B, LL.M", desc: "Legal education with moot courts and clinical programs", href: "/school-of-law", color: "from-amber-700/90 to-amber-950/95", icon: "⚖️", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=70" },
+  { name: "School of Pharmacy", courses: "B.Pharm, D.Pharm", desc: "Pharmaceutical sciences with modern lab infrastructure", href: "/school-of-pharmacy", color: "from-green-700/90 to-green-950/95", icon: "💊", img: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=70" },
+  { name: "School of Education", courses: "B.Ed, M.Ed", desc: "Training future educators with modern pedagogical approaches", href: "/school-of-education", color: "from-cyan-700/90 to-cyan-950/95", icon: "🎓", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=70" },
+  { name: "School of Applied Science", courses: "B.Sc, M.Sc", desc: "Pure and applied sciences with research-oriented curriculum", href: "/school-of-applied-science", color: "from-orange-700/90 to-orange-950/95", icon: "🔬", img: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=600&q=70" },
 ];
 
 const newsItems = [
@@ -212,18 +212,28 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Schools & Programs</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Explore our diverse range of undergraduate and postgraduate programs designed for the modern world</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {programs.map(program => (
               <Link key={program.name} href={program.href} className="group block">
-                <div className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
-                  <div className={`bg-gradient-to-br ${program.color} p-6 text-white relative`}>
-                    <span className="text-3xl absolute top-4 right-4 opacity-60">{program.icon}</span>
-                    <h3 className="text-lg font-bold mb-1">{program.name}</h3>
-                    <p className="text-white/80 text-sm">{program.courses}</p>
+                <div className="rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 h-full border border-white/5">
+                  {/* Image with gradient overlay */}
+                  <div className="relative h-44 overflow-hidden">
+                    <img
+                      src={program.img}
+                      alt={program.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${program.color}`} />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5">
+                      <span className="text-3xl mb-2 drop-shadow">{program.icon}</span>
+                      <h3 className="text-lg font-bold text-white leading-tight drop-shadow">{program.name}</h3>
+                      <p className="text-white/80 text-sm font-medium mt-0.5">{program.courses}</p>
+                    </div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-muted-foreground text-sm leading-relaxed">{program.desc}</p>
-                    <div className="flex items-center gap-1 text-[hsl(219,60%,28%)] font-medium text-sm mt-4 group-hover:gap-2 transition-all">
+                  {/* Card body */}
+                  <div className="p-5 bg-white border-t-0">
+                    <p className="text-gray-500 text-sm leading-relaxed">{program.desc}</p>
+                    <div className="flex items-center gap-1 text-[hsl(219,60%,28%)] font-semibold text-sm mt-4 group-hover:gap-2.5 transition-all">
                       Explore Program <ChevronRight className="h-4 w-4" />
                     </div>
                   </div>
