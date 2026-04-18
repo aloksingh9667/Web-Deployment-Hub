@@ -1,0 +1,39 @@
+2026-04-18T04:20:39.119193437Z ==> Cloning from https://github.com/aloksingh9667/aeh-backend
+2026-04-18T04:20:39.73225035Z ==> Checking out commit 71c3f4527966882d2871a76921a38783b084bdbe in branch main
+2026-04-18T04:20:41.162469198Z ==> Using Node.js version 22.22.0 (default)
+2026-04-18T04:20:41.185983331Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-04-18T04:20:43.13268036Z ==> Running build command '	npm install -g pnpm@10.26.1 && pnpm install && pnpm --filter @workspace/api-server run build'...
+2026-04-18T04:20:44.153307206Z 
+2026-04-18T04:20:44.153329868Z added 1 package in 955ms
+2026-04-18T04:20:44.153342819Z 
+2026-04-18T04:20:44.153346999Z 1 package is looking for funding
+2026-04-18T04:20:44.153365531Z   run `npm fund` for details
+2026-04-18T04:20:53.148284139Z 
+2026-04-18T04:20:53.148312592Z > @workspace/api-server@0.0.0 build /opt/render/project/src/artifacts/api-server
+2026-04-18T04:20:53.148318022Z > node ./build.mjs
+2026-04-18T04:20:53.148321942Z 
+2026-04-18T04:20:53.750141934Z 
+2026-04-18T04:20:53.750165166Z   dist/index.mjs                       2.8mb ⚠️
+2026-04-18T04:20:53.750185308Z   dist/pino-worker.mjs               153.4kb
+2026-04-18T04:20:53.750191168Z   dist/pino-file.mjs                 142.1kb
+2026-04-18T04:20:53.750194378Z   dist/pino-pretty.mjs               114.6kb
+2026-04-18T04:20:53.750197659Z   dist/thread-stream-worker.mjs        7.3kb
+2026-04-18T04:20:53.750200689Z   dist/index.mjs.map                   4.9mb
+2026-04-18T04:20:53.750203699Z   dist/pino-worker.mjs.map           256.9kb
+2026-04-18T04:20:53.750206829Z   dist/pino-file.mjs.map             229.0kb
+2026-04-18T04:20:53.7502099Z   dist/pino-pretty.mjs.map           204.0kb
+2026-04-18T04:20:53.75021303Z   dist/thread-stream-worker.mjs.map   12.0kb
+2026-04-18T04:20:53.75021599Z 
+2026-04-18T04:20:53.7502196Z ⚡ Done in 545ms
+2026-04-18T04:20:55.132739828Z ==> Uploading build...
+2026-04-18T04:21:00.965751365Z ==> Uploaded in 3.7s. Compression took 2.1s
+2026-04-18T04:21:00.98749529Z ==> Build successful 🎉
+2026-04-18T04:21:02.984031476Z ==> Deploying...
+2026-04-18T04:21:03.04865794Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-04-18T04:21:21.68696662Z ==> Running 'yarn start'
+2026-04-18T04:21:23.875079455Z error This project's package.json defines "packageManager": "yarn@pnpm@10.26.1". However the current global version of Yarn is 1.22.22.
+2026-04-18T04:21:23.877910438Z 
+2026-04-18T04:21:23.877925688Z Presence of the "packageManager" field indicates that the project is meant to be used with Corepack, a tool included by default with all official Node.js distributions starting from 16.9 and 14.19.
+2026-04-18T04:21:23.877930138Z Corepack must currently be enabled by running corepack enable in your terminal. For more information, check out https://yarnpkg.com/corepack.
+2026-04-18T04:21:27.427044124Z ==> Exited with status 1
+2026-04-18T04:21:27.429655686Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
