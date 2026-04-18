@@ -1,0 +1,98 @@
+2026-04-18T04:14:13.141Z	Initializing build environment...
+2026-04-18T04:14:14.867Z	Success: Finished initializing build environment
+2026-04-18T04:14:15.429Z	Cloning repository...
+2026-04-18T04:14:16.484Z	No build output detected to cache. Skipping.
+2026-04-18T04:14:16.484Z	No dependencies detected to cache. Skipping.
+2026-04-18T04:14:17.695Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@22.16.0
+2026-04-18T04:14:19.165Z	Installing project dependencies: bun install
+2026-04-18T04:14:19.326Z	bun install v1.2.15 (df017990)
+2026-04-18T04:14:19.354Z	Resolving dependencies
+2026-04-18T04:14:19.903Z	Resolved, downloaded and extracted [8]
+2026-04-18T04:14:19.910Z	Saved lockfile
+2026-04-18T04:14:19.911Z	
+2026-04-18T04:14:19.913Z	$ rm -f package-lock.json yarn.lock
+2026-04-18T04:14:19.916Z	
+2026-04-18T04:14:19.916Z	+ prettier@3.8.3
+2026-04-18T04:14:19.916Z	+ typescript@5.9.3 (v6.0.3 available)
+2026-04-18T04:14:19.916Z	
+2026-04-18T04:14:19.916Z	2 packages installed [624.00ms]
+2026-04-18T04:14:20.084Z	Executing user build command: pnpm install && pnpm --filter @workspace/aeh-website run build
+2026-04-18T04:14:20.694Z	Scope: all 5 workspace projects
+2026-04-18T04:14:20.732Z	 WARN  Moving prettier that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T04:14:20.734Z	 WARN  Moving typescript that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T04:14:21.040Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-04-18T04:14:22.052Z	Progress: resolved 43, reused 0, downloaded 39, added 0
+2026-04-18T04:14:23.061Z	Progress: resolved 59, reused 0, downloaded 44, added 0
+2026-04-18T04:14:24.064Z	Progress: resolved 64, reused 0, downloaded 49, added 0
+2026-04-18T04:14:25.067Z	Progress: resolved 68, reused 0, downloaded 51, added 0
+2026-04-18T04:14:26.073Z	Progress: resolved 69, reused 0, downloaded 59, added 0
+2026-04-18T04:14:27.076Z	Progress: resolved 69, reused 0, downloaded 69, added 0
+2026-04-18T04:14:29.245Z	Progress: resolved 71, reused 0, downloaded 69, added 0
+2026-04-18T04:14:30.307Z	Progress: resolved 129, reused 0, downloaded 89, added 0
+2026-04-18T04:14:31.306Z	Progress: resolved 135, reused 0, downloaded 111, added 0
+2026-04-18T04:14:32.327Z	Progress: resolved 171, reused 0, downloaded 153, added 0
+2026-04-18T04:14:33.327Z	Progress: resolved 255, reused 0, downloaded 231, added 0
+2026-04-18T04:14:34.328Z	Progress: resolved 333, reused 0, downloaded 286, added 0
+2026-04-18T04:14:35.328Z	Progress: resolved 379, reused 0, downloaded 347, added 0
+2026-04-18T04:14:35.628Z	Packages: +377
+2026-04-18T04:14:35.628Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-04-18T04:14:36.329Z	Progress: resolved 379, reused 0, downloaded 377, added 163
+2026-04-18T04:14:37.125Z	Progress: resolved 379, reused 0, downloaded 377, added 377, done
+2026-04-18T04:14:37.286Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-04-18T04:14:37.382Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-04-18T04:14:38.824Z	. preinstall$ rm -f package-lock.json yarn.lock
+2026-04-18T04:14:38.844Z	. preinstall: Done
+2026-04-18T04:14:38.878Z	
+2026-04-18T04:14:38.879Z	devDependencies:
+2026-04-18T04:14:38.879Z	+ prettier 3.8.3
+2026-04-18T04:14:38.879Z	+ typescript 5.9.3 (6.0.3 is available)
+2026-04-18T04:14:38.879Z	
+2026-04-18T04:14:38.902Z	Done in 18.6s using pnpm v10.26.1
+2026-04-18T04:14:39.593Z	
+2026-04-18T04:14:39.593Z	> @workspace/aeh-website@0.0.0 build /opt/buildhome/repo/artifacts/aeh-website
+2026-04-18T04:14:39.593Z	> vite build --config vite.config.ts
+2026-04-18T04:14:39.593Z	
+2026-04-18T04:14:40.138Z	vite v7.3.2 building client environment for production...
+2026-04-18T04:14:40.247Z	transforming...
+2026-04-18T04:14:41.122Z	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-04-18T04:14:44.838Z	✓ 1829 modules transformed.
+2026-04-18T04:14:45.307Z	rendering chunks...
+2026-04-18T04:14:45.320Z	computing gzip size...
+2026-04-18T04:14:45.355Z	dist/public/index.html                   0.74 kB │ gzip:   0.42 kB
+2026-04-18T04:14:45.355Z	dist/public/assets/index-Bz8z3UCa.css  163.72 kB │ gzip:  24.25 kB
+2026-04-18T04:14:45.360Z	dist/public/assets/index-DI30VVPp.js   691.57 kB │ gzip: 189.76 kB
+2026-04-18T04:14:45.360Z	
+2026-04-18T04:14:45.360Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2026-04-18T04:14:45.360Z	- Using dynamic import() to code-split the application
+2026-04-18T04:14:45.360Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-04-18T04:14:45.360Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-04-18T04:14:45.360Z	✓ built in 5.15s
+2026-04-18T04:14:45.445Z	Success: Build command completed
+2026-04-18T04:14:45.600Z	Executing user deploy command: npx wrangler pages project create aeh || true && npx wrangler pages deploy artifacts/aeh-website/dist/public --project-name=aeh
+2026-04-18T04:14:46.754Z	npm warn exec The following package was not found and will be installed: wrangler@4.83.0
+2026-04-18T04:14:55.556Z	
+2026-04-18T04:14:55.556Z	 ⛅️ wrangler 4.83.0
+2026-04-18T04:14:55.557Z	───────────────────
+2026-04-18T04:14:55.579Z	
+2026-04-18T04:14:55.636Z	✘ [ERROR] Must specify a production branch.
+2026-04-18T04:14:55.636Z	
+2026-04-18T04:14:55.637Z	
+2026-04-18T04:14:55.730Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-04-18_04-14-55_212.log"
+2026-04-18T04:14:57.967Z	
+2026-04-18T04:14:57.967Z	 ⛅️ wrangler 4.83.0
+2026-04-18T04:14:57.967Z	───────────────────
+2026-04-18T04:14:58.425Z	▲ [WARNING] Warning: Your working directory is a git repo and has uncommitted changes
+2026-04-18T04:14:58.426Z	
+2026-04-18T04:14:58.426Z	  To silence this warning, pass in --commit-dirty=true
+2026-04-18T04:14:58.427Z	
+2026-04-18T04:14:58.427Z	
+2026-04-18T04:14:58.563Z	
+2026-04-18T04:14:58.565Z	✘ [ERROR] A request to the Cloudflare API (/accounts/46a8b435fb5da4f6ff7f1508b626eb53/pages/projects/aeh) failed.
+2026-04-18T04:14:58.565Z	
+2026-04-18T04:14:58.565Z	  Project not found. The specified project name does not match any of your existing projects. [code: 8000007]
+2026-04-18T04:14:58.565Z	  
+2026-04-18T04:14:58.566Z	  If you think this is a bug, please open an issue at: https://github.com/cloudflare/workers-sdk/issues/new/choose
+2026-04-18T04:14:58.566Z	
+2026-04-18T04:14:58.566Z	
+2026-04-18T04:14:58.572Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-04-18_04-14-57_640.log"
+2026-04-18T04:14:58.629Z	Failed: error occurred while running deploy command

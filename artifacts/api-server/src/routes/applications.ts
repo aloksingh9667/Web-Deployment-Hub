@@ -19,7 +19,7 @@ router.get("/", requireAuth, async (req, res) => {
   try {
     const query = db.select().from(applicationsTable).orderBy(desc(applicationsTable.createdAt));
 
-    const whereClause = status ? eq(applicationsTable.status, status as "pending" | "reviewing" | "accepted" | "rejected") : undefined;
+    const whereClause = status ? eq(applicationsTable.status, status as "pending" | "reviewing" | "reviewed" | "accepted" | "rejected") : undefined;
 
     const data = whereClause
       ? await query.where(whereClause).limit(limit).offset(offset)
@@ -94,7 +94,7 @@ router.patch("/:id", requireAuth, async (req, res) => {
   try {
     const [updated] = await db.update(applicationsTable)
       .set({
-        status: parsed.data.status as "pending" | "reviewing" | "accepted" | "rejected",
+        status: parsed.data.status as "pending" | "reviewing" | "reviewed" | "accepted" | "rejected",
         notes: parsed.data.notes ?? null,
         updatedAt: new Date(),
       })

@@ -56,6 +56,7 @@ export type ApplicationStatus =
 export const ApplicationStatus = {
   pending: "pending",
   reviewing: "reviewing",
+  reviewed: "reviewed",
   accepted: "accepted",
   rejected: "rejected",
 } as const;
@@ -96,6 +97,7 @@ export type UpdateApplicationStatusBodyStatus =
 export const UpdateApplicationStatusBodyStatus = {
   pending: "pending",
   reviewing: "reviewing",
+  reviewed: "reviewed",
   accepted: "accepted",
   rejected: "rejected",
 } as const;
@@ -265,6 +267,7 @@ export type ListApplicationsStatus =
 export const ListApplicationsStatus = {
   pending: "pending",
   reviewing: "reviewing",
+  reviewed: "reviewed",
   accepted: "accepted",
   rejected: "rejected",
 } as const;

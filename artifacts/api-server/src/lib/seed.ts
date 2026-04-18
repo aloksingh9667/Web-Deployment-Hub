@@ -19,7 +19,7 @@ export async function seedDatabase() {
     if (Number(existingApps[0]?.cnt ?? 0) === 0) {
       await db.insert(applicationsTable).values([
         { name: "Rahul Sharma", email: "rahul@example.com", phone: "9876543210", course: "BBA", classType: "regular", status: "pending", message: "Interested in management studies" },
-        { name: "Priya Gupta", email: "priya@example.com", phone: "9812345678", course: "BCA", classType: "regular", status: "reviewing", message: "Looking forward to IT career" },
+        { name: "Priya Gupta", email: "priya@example.com", phone: "9812345678", course: "BCA", classType: "regular", status: "reviewed", message: "Looking forward to IT career" },
         { name: "Amit Kumar", email: "amit@example.com", phone: "9765432101", course: "MBA", classType: "weekend", status: "accepted" },
         { name: "Sunita Singh", email: "sunita@example.com", phone: "9823456789", course: "B.Com", classType: "regular", status: "pending" },
         { name: "Deepak Patel", email: "deepak@example.com", phone: "9898989898", course: "BJMC", classType: "regular", status: "rejected" },
