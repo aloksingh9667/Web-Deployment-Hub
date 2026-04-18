@@ -2,17 +2,17 @@
 
 ## Project Overview
 
-A complete multi-page educational institution website for Avviare Educational Hub (Bilaspur, Chhattisgarh). Includes all public pages, 9 school pages, placement pages, forms, and a protected admin panel.
+A complete multi-page educational institution website for Avviare Educational Hub (Bilaspur, Chhattisgarh). Includes all public pages, 9 school pages, placement pages, forms, a JWT-protected admin panel, and a full student portal with Razorpay fee payment and college-format receipts.
 
 ## Architecture
 
 This is a **pnpm monorepo** with two main deployable artifacts:
 
 - **Frontend** (`artifacts/aeh-website`): React + Vite + Tailwind CSS  
-  → Deployable on **Netlify** (static hosting)
+  → Deployed via **Cloudflare Pages** (`https://github.com/aloksingh9667/aeh-frontend`)
   
 - **Backend** (`artifacts/api-server`): Node.js + Express + Drizzle ORM  
-  → Deployable on **Render** (Node.js service)
+  → Deployed via **Render** (`https://github.com/aloksingh9667/aeh-backend`)
 
 ### Shared Packages
 
@@ -57,30 +57,58 @@ This is a **pnpm monorepo** with two main deployable artifacts:
 - `/admin/contacts` — View contact inquiries
 - `/admin/careers` — View career applications
 
+### Student Portal (JWT protected)
+- `/student/login` — Student login
+- `/student/register` — Student registration
+- `/student/dashboard` — Student dashboard with course info
+- `/student/fees` — Fee payment (Razorpay Checkout in test mode)
+- `/student/receipts` — College-format receipts with View/Print/Download
+
 ## Backend API Endpoints
 
 Base path: `/api`
 
 - `GET /healthz` — Health check
-- `POST /auth/login` — JWT login
-- `GET /auth/me` — Get current user (requires Bearer token)
+- `POST /auth/login` — JWT admin login
+- `GET /auth/me` — Get current admin (requires Bearer token)
 - `GET/POST /applications` — List/Create admission applications
 - `PATCH /applications/:id/status` — Update application status
 - `GET/POST /contacts` — List/Create contact inquiries
 - `GET/POST /careers` — List/Create career applications
 - `GET /stats/dashboard` — Dashboard statistics
+- `GET /courses` — List courses
+- `GET /fee-structures` — Get fee structures (optionally filtered by courseCode)
+- `POST /student/auth/register` — Student registration
+- `POST /student/auth/login` — Student login
+- `GET /student/auth/me` — Get current student
+- `GET /students` — List students (admin only)
+- `POST /payments/create-order` — Create Razorpay order (student auth)
+- `POST /payments/verify` — Verify Razorpay payment signature
+- `GET /payments/my-payments` — Student's payment history
+- `GET /payments` — All payments (admin only)
 
 ## Database (PostgreSQL)
 
 Tables:
 - `admins` — Admin users with bcrypt passwords
-- `applications` — Admission applications (status enum: pending/reviewed/accepted/rejected)
+- `applications` — Admission applications (status enum)
 - `contacts` — Contact form submissions
 - `careers` — Career applications
+- `students` — Student accounts (enum: active/inactive/graduated/suspended)
+- `courses` — Available courses/programs
+- `fee_structures` — Fee structure per course + payment plan
+- `fee_payments` — Payment records with Razorpay IDs and receipt numbers
 
 Default seeded admin users:
 - `admin` / `admin123`
 - `admissions` / `admissions123`
+
+## Razorpay Integration
+
+- Test mode keys set: `rzp_test_SeZoyMeUuq0m2d` (test mode)
+- Flow: Create order (backend) → Razorpay Checkout JS (frontend) → Verify signature (backend)
+- Receipt number format: `AEH{YY}{MM}{5-digit-random}`
+- Test card: 4111 1111 1111 1111, any future expiry, any CVV
 
 ## Design Theme
 
@@ -90,20 +118,35 @@ Default seeded admin users:
 
 ## Environment Variables
 
-### API Server
-- `DATABASE_URL` — PostgreSQL connection string (Replit managed)
+### API Server (Render)
+- `DATABASE_URL` — PostgreSQL connection string
 - `SESSION_SECRET` — JWT signing secret
+- `JWT_SECRET` — Admin JWT secret
+- `STUDENT_JWT_SECRET` — Student JWT secret
+- `RAZORPAY_KEY_ID` — Razorpay key ID (test: `rzp_test_*`)
+- `RAZORPAY_KEY_SECRET` — Razorpay secret key
 - `ALLOWED_ORIGINS` — CORS allowed origins (comma-separated)
-- `PORT` — Server port (managed by Replit)
+- `PORT` — Server port (managed by platform)
+- `NODE_ENV` — `production`
 
-### Frontend
-- `VITE_API_URL` — (Optional) API base URL. Leave empty for same-origin deployment.
-- `PORT` — Server port (managed by Replit)
-- `BASE_PATH` — URL base path (managed by Replit)
+### Frontend (Cloudflare Pages)
+- `VITE_API_URL` — API base URL (your Render backend URL + /api)
 
-## Deployment Notes
+## GitHub Repos (Production Deployment)
 
-For **separate deployment** (Netlify frontend + Render backend):
-1. Deploy API server to Render — set `ALLOWED_ORIGINS` to your Netlify URL
-2. Deploy frontend to Netlify — set `VITE_API_URL` to your Render URL
-3. Add `_redirects` file for SPA routing on Netlify: `/* /index.html 200`
+| Repo | URL | Platform |
+|------|-----|----------|
+| Frontend | https://github.com/aloksingh9667/aeh-frontend | Cloudflare Pages |
+| Backend | https://github.com/aloksingh9667/aeh-backend | Render |
+
+## Deployment Configuration
+
+### Render (Backend)
+- Build: `npm install -g pnpm && pnpm install && pnpm build`
+- Start: `node packages/api-server/dist/index.mjs`
+- Config: `render.yaml` in backend repo
+
+### Cloudflare Pages (Frontend)
+- Build: `npm install -g pnpm && pnpm install && pnpm build`
+- Output dir: `packages/aeh-website/dist`
+- SPA routing: `_redirects` file: `/* /index.html 200`
