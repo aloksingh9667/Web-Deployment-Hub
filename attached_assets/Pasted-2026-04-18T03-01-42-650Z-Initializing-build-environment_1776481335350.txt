@@ -1,0 +1,76 @@
+2026-04-18T03:01:42.650Z	Initializing build environment...
+2026-04-18T03:01:44.113Z	Success: Finished initializing build environment
+2026-04-18T03:01:44.623Z	Cloning repository...
+2026-04-18T03:01:45.704Z	No build output detected to cache. Skipping.
+2026-04-18T03:01:45.704Z	No dependencies detected to cache. Skipping.
+2026-04-18T03:01:46.924Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@22.16.0
+2026-04-18T03:01:48.514Z	Installing project dependencies: bun install
+2026-04-18T03:01:48.675Z	bun install v1.2.15 (df017990)
+2026-04-18T03:01:48.704Z	Resolving dependencies
+2026-04-18T03:01:49.286Z	Resolved, downloaded and extracted [8]
+2026-04-18T03:01:49.293Z	Saved lockfile
+2026-04-18T03:01:49.293Z	
+2026-04-18T03:01:49.295Z	$ rm -f package-lock.json yarn.lock
+2026-04-18T03:01:49.299Z	
+2026-04-18T03:01:49.299Z	+ prettier@3.8.3
+2026-04-18T03:01:49.300Z	+ typescript@5.9.3 (v6.0.3 available)
+2026-04-18T03:01:49.300Z	
+2026-04-18T03:01:49.300Z	2 packages installed [656.00ms]
+2026-04-18T03:01:49.429Z	Executing user build command: pnpm install && pnpm --filter @workspace/aeh-website run build
+2026-04-18T03:01:49.975Z	Scope: all 5 workspace projects
+2026-04-18T03:01:50.021Z	 WARN  Moving typescript that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:01:50.021Z	 WARN  Moving prettier that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:01:50.310Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-04-18T03:01:51.313Z	Progress: resolved 47, reused 0, downloaded 41, added 0
+2026-04-18T03:01:52.316Z	Progress: resolved 58, reused 0, downloaded 47, added 0
+2026-04-18T03:01:53.439Z	Progress: resolved 64, reused 0, downloaded 48, added 0
+2026-04-18T03:01:54.439Z	Progress: resolved 68, reused 0, downloaded 52, added 0
+2026-04-18T03:01:55.439Z	Progress: resolved 69, reused 0, downloaded 66, added 0
+2026-04-18T03:01:57.814Z	Progress: resolved 71, reused 0, downloaded 69, added 0
+2026-04-18T03:01:58.805Z	Progress: resolved 120, reused 0, downloaded 101, added 0
+2026-04-18T03:01:59.812Z	Progress: resolved 150, reused 0, downloaded 125, added 0
+2026-04-18T03:02:00.812Z	Progress: resolved 198, reused 0, downloaded 174, added 0
+2026-04-18T03:02:01.822Z	Progress: resolved 292, reused 0, downloaded 244, added 0
+2026-04-18T03:02:02.835Z	Progress: resolved 366, reused 0, downloaded 330, added 0
+2026-04-18T03:02:03.352Z	Packages: +377
+2026-04-18T03:02:03.352Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-04-18T03:02:03.835Z	Progress: resolved 379, reused 0, downloaded 377, added 157
+2026-04-18T03:02:04.654Z	Progress: resolved 379, reused 0, downloaded 377, added 377, done
+2026-04-18T03:02:04.793Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-04-18T03:02:04.869Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-04-18T03:02:06.030Z	. preinstall$ rm -f package-lock.json yarn.lock
+2026-04-18T03:02:06.047Z	. preinstall: Done
+2026-04-18T03:02:06.077Z	
+2026-04-18T03:02:06.077Z	devDependencies:
+2026-04-18T03:02:06.077Z	+ prettier 3.8.3
+2026-04-18T03:02:06.077Z	+ typescript 5.9.3 (6.0.3 is available)
+2026-04-18T03:02:06.077Z	
+2026-04-18T03:02:06.099Z	Done in 16.5s using pnpm v10.26.1
+2026-04-18T03:02:06.705Z	
+2026-04-18T03:02:06.705Z	> @workspace/aeh-website@0.0.0 build /opt/buildhome/repo/artifacts/aeh-website
+2026-04-18T03:02:06.705Z	> vite build --config vite.config.ts
+2026-04-18T03:02:06.705Z	
+2026-04-18T03:02:06.909Z	▲ [WARNING] Cannot find base config file "../../tsconfig.base.json" [tsconfig.json]
+2026-04-18T03:02:06.910Z	
+2026-04-18T03:02:06.910Z	    tsconfig.json:2:13:
+2026-04-18T03:02:06.911Z	      2 │   "extends": "../../tsconfig.base.json",
+2026-04-18T03:02:06.912Z	        ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-04-18T03:02:06.912Z	
+2026-04-18T03:02:07.151Z	vite v7.3.2 building client environment for production...
+2026-04-18T03:02:07.221Z	✓ 0 modules transformed.
+2026-04-18T03:02:07.225Z	✗ Build failed in 37ms
+2026-04-18T03:02:07.225Z	error during build:
+2026-04-18T03:02:07.225Z	[vite:build-html] failed to resolve "extends":"../../tsconfig.base.json" in /opt/buildhome/repo/artifacts/aeh-website/tsconfig.json
+2026-04-18T03:02:07.225Z	file: /opt/buildhome/repo/artifacts/aeh-website/index.html
+2026-04-18T03:02:07.225Z	    at resolveExtends (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:5809:8)
+2026-04-18T03:02:07.225Z	    at parseExtends (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:5775:71)
+2026-04-18T03:02:07.225Z	    at parse$13 (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:5677:23)
+2026-04-18T03:02:07.225Z	    at async loadTsconfigJsonForFile (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:6286:37)
+2026-04-18T03:02:07.225Z	    at async transformWithEsbuild (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:6086:55)
+2026-04-18T03:02:07.225Z	    at async Object.transform (file:///opt/buildhome/repo/node_modules/.pnpm/vite@7.3.2_@types+node@25.6.0_jiti@2.6.1_lightningcss@1.32.0_tsx@4.21.0_yaml@2.8.3/node_modules/vite/dist/node/chunks/config.js:6172:20)
+2026-04-18T03:02:07.225Z	    at async transform (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/node-entry.js:21657:16)
+2026-04-18T03:02:07.225Z	    at async ModuleLoader.addModuleSource (file:///opt/buildhome/repo/node_modules/.pnpm/rollup@4.60.1/node_modules/rollup/dist/es/shared/node-entry.js:21885:36)
+2026-04-18T03:02:07.260Z	/opt/buildhome/repo/artifacts/aeh-website:
+2026-04-18T03:02:07.260Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/aeh-website@0.0.0 build: `vite build --config vite.config.ts`
+2026-04-18T03:02:07.260Z	Exit status 1
+2026-04-18T03:02:07.286Z	Failed: error occurred while running build command
