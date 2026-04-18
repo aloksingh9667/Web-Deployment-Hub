@@ -1,0 +1,97 @@
+2026-04-18T03:10:25.041Z	Initializing build environment...
+2026-04-18T03:10:25.041Z	Initializing build environment...
+2026-04-18T03:10:26.598Z	Success: Finished initializing build environment
+2026-04-18T03:10:28.058Z	Cloning repository...
+2026-04-18T03:10:29.295Z	No build output detected to cache. Skipping.
+2026-04-18T03:10:29.295Z	No dependencies detected to cache. Skipping.
+2026-04-18T03:10:30.681Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@22.16.0
+2026-04-18T03:10:32.172Z	Installing project dependencies: bun install
+2026-04-18T03:10:32.344Z	bun install v1.2.15 (df017990)
+2026-04-18T03:10:32.362Z	Resolving dependencies
+2026-04-18T03:10:32.887Z	Resolved, downloaded and extracted [8]
+2026-04-18T03:10:32.893Z	Saved lockfile
+2026-04-18T03:10:32.893Z	
+2026-04-18T03:10:32.894Z	$ rm -f package-lock.json yarn.lock
+2026-04-18T03:10:32.897Z	
+2026-04-18T03:10:32.897Z	+ prettier@3.8.3
+2026-04-18T03:10:32.898Z	+ typescript@5.9.3 (v6.0.3 available)
+2026-04-18T03:10:32.898Z	
+2026-04-18T03:10:32.898Z	2 packages installed [576.00ms]
+2026-04-18T03:10:33.028Z	Executing user build command: pnpm install && pnpm --filter @workspace/aeh-website run build
+2026-04-18T03:10:33.632Z	Scope: all 5 workspace projects
+2026-04-18T03:10:33.672Z	 WARN  Moving typescript that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:10:33.673Z	 WARN  Moving prettier that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:10:33.926Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-04-18T03:10:34.929Z	Progress: resolved 42, reused 0, downloaded 39, added 0
+2026-04-18T03:10:35.937Z	Progress: resolved 59, reused 0, downloaded 47, added 0
+2026-04-18T03:10:36.962Z	Progress: resolved 65, reused 0, downloaded 49, added 0
+2026-04-18T03:10:37.962Z	Progress: resolved 68, reused 0, downloaded 50, added 0
+2026-04-18T03:10:38.963Z	Progress: resolved 69, reused 0, downloaded 55, added 0
+2026-04-18T03:10:41.513Z	Progress: resolved 71, reused 0, downloaded 69, added 0
+2026-04-18T03:10:42.580Z	Progress: resolved 120, reused 0, downloaded 108, added 0
+2026-04-18T03:10:43.592Z	Progress: resolved 145, reused 0, downloaded 117, added 0
+2026-04-18T03:10:44.603Z	Progress: resolved 188, reused 0, downloaded 159, added 0
+2026-04-18T03:10:45.603Z	Progress: resolved 266, reused 0, downloaded 216, added 0
+2026-04-18T03:10:46.600Z	Progress: resolved 358, reused 0, downloaded 300, added 0
+2026-04-18T03:10:47.249Z	Packages: +377
+2026-04-18T03:10:47.250Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-04-18T03:10:47.600Z	Progress: resolved 379, reused 0, downloaded 374, added 8
+2026-04-18T03:10:48.600Z	Progress: resolved 379, reused 0, downloaded 377, added 332
+2026-04-18T03:10:48.669Z	Progress: resolved 379, reused 0, downloaded 377, added 377, done
+2026-04-18T03:10:48.806Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-04-18T03:10:48.891Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-04-18T03:10:50.038Z	. preinstall$ rm -f package-lock.json yarn.lock
+2026-04-18T03:10:50.057Z	. preinstall: Done
+2026-04-18T03:10:50.087Z	
+2026-04-18T03:10:50.087Z	devDependencies:
+2026-04-18T03:10:50.087Z	+ prettier 3.8.3
+2026-04-18T03:10:50.087Z	+ typescript 5.9.3 (6.0.3 is available)
+2026-04-18T03:10:50.087Z	
+2026-04-18T03:10:50.110Z	Done in 16.9s using pnpm v10.26.1
+2026-04-18T03:10:50.731Z	
+2026-04-18T03:10:50.732Z	> @workspace/aeh-website@0.0.0 build /opt/buildhome/repo/artifacts/aeh-website
+2026-04-18T03:10:50.733Z	> vite build --config vite.config.ts
+2026-04-18T03:10:50.733Z	
+2026-04-18T03:10:51.238Z	vite v7.3.2 building client environment for production...
+2026-04-18T03:10:51.311Z	transforming...
+2026-04-18T03:10:52.074Z	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-04-18T03:10:55.748Z	✓ 1829 modules transformed.
+2026-04-18T03:10:56.204Z	rendering chunks...
+2026-04-18T03:10:56.215Z	computing gzip size...
+2026-04-18T03:10:56.241Z	dist/public/index.html                   0.74 kB │ gzip:   0.42 kB
+2026-04-18T03:10:56.242Z	dist/public/assets/index-Bz8z3UCa.css  163.72 kB │ gzip:  24.25 kB
+2026-04-18T03:10:56.242Z	dist/public/assets/index-DI30VVPp.js   691.57 kB │ gzip: 189.76 kB
+2026-04-18T03:10:56.242Z	
+2026-04-18T03:10:56.242Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2026-04-18T03:10:56.242Z	- Using dynamic import() to code-split the application
+2026-04-18T03:10:56.243Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-04-18T03:10:56.243Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-04-18T03:10:56.245Z	✓ built in 4.97s
+2026-04-18T03:10:56.340Z	Success: Build command completed
+2026-04-18T03:10:56.470Z	Executing user deploy command: npx wrangler pages deploy artifacts/aeh-website/dist/public
+2026-04-18T03:10:57.634Z	npm warn exec The following package was not found and will be installed: wrangler@4.83.0
+2026-04-18T03:11:07.235Z	
+2026-04-18T03:11:07.235Z	 ⛅️ wrangler 4.83.0
+2026-04-18T03:11:07.235Z	───────────────────
+2026-04-18T03:11:07.454Z	
+2026-04-18T03:11:07.507Z	✘ [ERROR] A request to the Cloudflare API (/accounts/d80b03f719c4e96b22ac948f87847a23/pages/projects/aeh-frontend) failed.
+2026-04-18T03:11:07.507Z	
+2026-04-18T03:11:07.508Z	  Authentication error [code: 10000]
+2026-04-18T03:11:07.508Z	
+2026-04-18T03:11:07.508Z	
+2026-04-18T03:11:07.508Z	📎 It looks like you are authenticating Wrangler via a custom API token set in an environment variable.
+2026-04-18T03:11:07.508Z	Please ensure it has the correct permissions for this operation.
+2026-04-18T03:11:07.508Z	
+2026-04-18T03:11:07.508Z	Getting User settings...
+2026-04-18T03:11:07.921Z	👋 You are logged in with an User API Token, associated with the email alokpratap4799@gmail.com.
+2026-04-18T03:11:07.921Z	ℹ️  The API Token is read from the CLOUDFLARE_API_TOKEN environment variable.
+2026-04-18T03:11:07.925Z	┌────────────────────────────────────┬──────────────────────────────────┐
+2026-04-18T03:11:07.926Z	│ Account Name                       │ Account ID                       │
+2026-04-18T03:11:07.926Z	├────────────────────────────────────┼──────────────────────────────────┤
+2026-04-18T03:11:07.926Z	│ Alokpratap4799@gmail.com's Account │ d80b03f719c4e96b22ac948f87847a23 │
+2026-04-18T03:11:07.926Z	└────────────────────────────────────┴──────────────────────────────────┘
+2026-04-18T03:11:07.926Z	🔓 To see token permissions visit https://dash.cloudflare.com/profile/api-tokens.
+2026-04-18T03:11:08.088Z	🎢 Membership roles in "Alokpratap4799@gmail.com's Account": Contact account super admin to change your permissions.
+2026-04-18T03:11:08.089Z	- Super Administrator - All Privileges
+2026-04-18T03:11:08.091Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-04-18_03-11-06_870.log"
+2026-04-18T03:11:08.172Z	Failed: error occurred while running deploy command
