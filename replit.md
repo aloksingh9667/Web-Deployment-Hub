@@ -24,7 +24,7 @@ This is a **pnpm monorepo** with two main deployable artifacts:
 ## Frontend Pages
 
 ### Public Pages
-- `/` — Home (hero, stats, programs grid, news, admission CTA)
+- `/` — Home (hero, stats, programs grid redesigned with brand-consistent navy/gold style, dynamic events from API, admission CTA)
 - `/about` — About (story, milestones, quick facts)
 - `/core-values` — Core Values (Integrity, Excellence, Compassion, Innovation)
 - `/leadership` — Leadership (Chairman, Principal, Director messages)

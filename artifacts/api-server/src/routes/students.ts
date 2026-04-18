@@ -18,6 +18,7 @@ const UpdateStudentBody = z.object({
   guardianName: z.string().optional(),
   guardianPhone: z.string().optional(),
   enrollmentYear: z.string().optional(),
+  admissionDate: z.string().optional(),
 });
 
 const CreateStudentBody = z.object({

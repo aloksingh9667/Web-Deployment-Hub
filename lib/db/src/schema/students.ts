@@ -14,6 +14,7 @@ export const studentsTable = pgTable("students", {
   enrollmentYear: text("enrollment_year").notNull(),
   semester: text("semester").default("1"),
   status: studentStatusEnum("status").default("pending").notNull(),
+  admissionDate: text("admission_date"),
   address: text("address"),
   guardianName: text("guardian_name"),
   guardianPhone: text("guardian_phone"),
