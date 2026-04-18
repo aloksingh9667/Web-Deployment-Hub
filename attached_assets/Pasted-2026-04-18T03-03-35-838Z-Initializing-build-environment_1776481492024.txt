@@ -1,0 +1,87 @@
+2026-04-18T03:03:35.838Z	Initializing build environment...
+2026-04-18T03:03:35.838Z	Initializing build environment...
+2026-04-18T03:03:38.263Z	Success: Finished initializing build environment
+2026-04-18T03:03:38.864Z	Cloning repository...
+2026-04-18T03:03:42.091Z	No build output detected to cache. Skipping.
+2026-04-18T03:03:42.091Z	No dependencies detected to cache. Skipping.
+2026-04-18T03:03:44.016Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@22.16.0
+2026-04-18T03:03:46.280Z	Installing project dependencies: bun install
+2026-04-18T03:03:46.519Z	bun install v1.2.15 (df017990)
+2026-04-18T03:03:46.562Z	Resolving dependencies
+2026-04-18T03:03:47.278Z	Resolved, downloaded and extracted [8]
+2026-04-18T03:03:47.285Z	Saved lockfile
+2026-04-18T03:03:47.285Z	
+2026-04-18T03:03:47.287Z	$ rm -f package-lock.json yarn.lock
+2026-04-18T03:03:47.291Z	
+2026-04-18T03:03:47.291Z	+ prettier@3.8.3
+2026-04-18T03:03:47.291Z	+ typescript@5.9.3 (v6.0.3 available)
+2026-04-18T03:03:47.291Z	
+2026-04-18T03:03:47.291Z	2 packages installed [836.00ms]
+2026-04-18T03:03:47.423Z	Executing user build command: pnpm install && pnpm --filter @workspace/aeh-website run build
+2026-04-18T03:03:48.142Z	Scope: all 5 workspace projects
+2026-04-18T03:03:48.190Z	 WARN  Moving typescript that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:03:48.191Z	 WARN  Moving prettier that was installed by a different package manager to "node_modules/.ignored"
+2026-04-18T03:03:48.389Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-04-18T03:03:49.428Z	Progress: resolved 32, reused 0, downloaded 24, added 0
+2026-04-18T03:03:50.441Z	Progress: resolved 51, reused 0, downloaded 43, added 0
+2026-04-18T03:03:51.452Z	Progress: resolved 59, reused 0, downloaded 44, added 0
+2026-04-18T03:03:52.561Z	Progress: resolved 64, reused 0, downloaded 46, added 0
+2026-04-18T03:03:53.552Z	Progress: resolved 68, reused 0, downloaded 47, added 0
+2026-04-18T03:03:54.553Z	Progress: resolved 69, reused 0, downloaded 65, added 0
+2026-04-18T03:03:55.554Z	Progress: resolved 69, reused 0, downloaded 68, added 0
+2026-04-18T03:03:58.239Z	Progress: resolved 71, reused 0, downloaded 69, added 0
+2026-04-18T03:03:59.260Z	Progress: resolved 108, reused 0, downloaded 88, added 0
+2026-04-18T03:04:00.269Z	Progress: resolved 144, reused 0, downloaded 116, added 0
+2026-04-18T03:04:01.281Z	Progress: resolved 148, reused 0, downloaded 117, added 0
+2026-04-18T03:04:02.281Z	Progress: resolved 170, reused 0, downloaded 142, added 0
+2026-04-18T03:04:03.304Z	Progress: resolved 221, reused 0, downloaded 175, added 0
+2026-04-18T03:04:04.309Z	Progress: resolved 288, reused 0, downloaded 244, added 0
+2026-04-18T03:04:05.402Z	Progress: resolved 357, reused 0, downloaded 291, added 0
+2026-04-18T03:04:06.298Z	Packages: +377
+2026-04-18T03:04:06.299Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-04-18T03:04:06.404Z	Progress: resolved 379, reused 0, downloaded 357, added 0
+2026-04-18T03:04:07.410Z	Progress: resolved 379, reused 0, downloaded 377, added 168
+2026-04-18T03:04:08.157Z	Progress: resolved 379, reused 0, downloaded 377, added 377, done
+2026-04-18T03:04:08.354Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-04-18T03:04:08.469Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-04-18T03:04:10.001Z	. preinstall$ rm -f package-lock.json yarn.lock
+2026-04-18T03:04:10.057Z	. preinstall: Done
+2026-04-18T03:04:10.108Z	
+2026-04-18T03:04:10.108Z	devDependencies:
+2026-04-18T03:04:10.109Z	+ prettier 3.8.3
+2026-04-18T03:04:10.109Z	+ typescript 5.9.3 (6.0.3 is available)
+2026-04-18T03:04:10.109Z	
+2026-04-18T03:04:10.142Z	Done in 22.4s using pnpm v10.26.1
+2026-04-18T03:04:11.164Z	
+2026-04-18T03:04:11.165Z	> @workspace/aeh-website@0.0.0 build /opt/buildhome/repo/artifacts/aeh-website
+2026-04-18T03:04:11.166Z	> vite build --config vite.config.ts
+2026-04-18T03:04:11.166Z	
+2026-04-18T03:04:12.206Z	vite v7.3.2 building client environment for production...
+2026-04-18T03:04:12.400Z	transforming...
+2026-04-18T03:04:13.622Z	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-04-18T03:04:19.676Z	✓ 1829 modules transformed.
+2026-04-18T03:04:20.312Z	rendering chunks...
+2026-04-18T03:04:20.333Z	computing gzip size...
+2026-04-18T03:04:20.382Z	dist/public/index.html                   0.74 kB │ gzip:   0.42 kB
+2026-04-18T03:04:20.383Z	dist/public/assets/index-Bz8z3UCa.css  163.72 kB │ gzip:  24.25 kB
+2026-04-18T03:04:20.383Z	dist/public/assets/index-DI30VVPp.js   691.57 kB │ gzip: 189.76 kB
+2026-04-18T03:04:20.384Z	✓ built in 8.10s
+2026-04-18T03:04:20.384Z	
+2026-04-18T03:04:20.384Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2026-04-18T03:04:20.384Z	- Using dynamic import() to code-split the application
+2026-04-18T03:04:20.386Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-04-18T03:04:20.388Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-04-18T03:04:20.494Z	Success: Build command completed
+2026-04-18T03:04:20.636Z	Executing user deploy command: npx wrangler deploy
+2026-04-18T03:04:22.339Z	npm warn exec The following package was not found and will be installed: wrangler@4.83.0
+2026-04-18T03:04:36.629Z	
+2026-04-18T03:04:36.629Z	 ⛅️ wrangler 4.83.0
+2026-04-18T03:04:36.629Z	───────────────────
+2026-04-18T03:04:37.278Z	
+2026-04-18T03:04:37.279Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-04-18T03:04:37.282Z	
+2026-04-18T03:04:37.365Z	✘ [ERROR] The Wrangler application detection logic has been run in the root of a workspace instead of targeting a specific project. Change your working directory to one of the applications in the workspace and try again.
+2026-04-18T03:04:37.365Z	
+2026-04-18T03:04:37.365Z	
+2026-04-18T03:04:37.406Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-04-18_03-04-36_234.log"
+2026-04-18T03:04:38.173Z	Failed: error occurred while running deploy command
