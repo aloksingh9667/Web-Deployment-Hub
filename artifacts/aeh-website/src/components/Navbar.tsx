@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, GraduationCap, User, LogOut, Phone, Mail } from "lucide-react";
+import { Menu, X, ChevronDown, GraduationCap, User, LogOut, Phone, Mail, MoreHorizontal } from "lucide-react";
 import { useStudentAuth } from "@/hooks/useStudentAuth";
 
 const programs = [
@@ -26,6 +26,13 @@ const aboutLinks = [
 const placementLinks = [
   { label: "Our Placements", href: "/placements" },
   { label: "Top Recruiters", href: "/top-recruiters" },
+];
+
+const moreLinks = [
+  { label: "News & Events", href: "/news" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -97,12 +104,14 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Nav */}
-            <div className="hidden xl:flex items-center gap-0.5">
+            {/* Desktop Nav — shown at lg (1024px+) */}
+            <div className="hidden lg:flex items-center gap-0.5">
               <NavLink href="/" active={location === "/"}>Home</NavLink>
+
               <DropdownNav label="About" isOpen={openDropdown === "about"} onToggle={() => toggle("about")}>
                 {aboutLinks.map(l => <DropdownItem key={l.href} href={l.href} label={l.label} onClick={() => setOpenDropdown(null)} />)}
               </DropdownNav>
+
               <DropdownNav label="Programs" isOpen={openDropdown === "programs"} onToggle={() => toggle("programs")} wide>
                 <div className="grid grid-cols-2 gap-0.5 p-1">
                   {programs.map(l => (
@@ -118,18 +127,31 @@ export function Navbar() {
                   ))}
                 </div>
               </DropdownNav>
+
               <NavLink href="/infrastructure">Infrastructure</NavLink>
+
               <DropdownNav label="Placements" isOpen={openDropdown === "placements"} onToggle={() => toggle("placements")}>
                 {placementLinks.map(l => <DropdownItem key={l.href} href={l.href} label={l.label} onClick={() => setOpenDropdown(null)} />)}
               </DropdownNav>
-              <NavLink href="/news">News</NavLink>
-              <NavLink href="/gallery">Gallery</NavLink>
-              <NavLink href="/careers">Careers</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
+
+              {/* Show News, Gallery, Careers, Contact directly at xl+, collapse into More at lg */}
+              <span className="hidden xl:contents">
+                <NavLink href="/news">News</NavLink>
+                <NavLink href="/gallery">Gallery</NavLink>
+                <NavLink href="/careers">Careers</NavLink>
+                <NavLink href="/contact">Contact</NavLink>
+              </span>
+
+              {/* "More" dropdown only on lg screens (not xl+) */}
+              <span className="xl:hidden">
+                <DropdownNav label="More" isOpen={openDropdown === "more"} onToggle={() => toggle("more")} icon={<MoreHorizontal className="h-3.5 w-3.5" />}>
+                  {moreLinks.map(l => <DropdownItem key={l.href} href={l.href} label={l.label} onClick={() => setOpenDropdown(null)} />)}
+                </DropdownNav>
+              </span>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="hidden xl:flex items-center gap-2 ml-1">
+            {/* CTA Buttons — shown at lg+ */}
+            <div className="hidden lg:flex items-center gap-2 ml-1">
               {student ? (
                 <div className="relative">
                   <button
@@ -169,14 +191,14 @@ export function Navbar() {
                   <User className="h-4 w-4" /> Student Login
                 </Link>
               )}
-              <Link href="/apply" className="bg-[hsl(43,96%,55%)] text-[hsl(220,20%,15%)] font-bold px-4 py-2 rounded-lg hover:bg-[hsl(43,96%,45%)] transition-colors text-sm">
+              <Link href="/apply" className="bg-[hsl(43,96%,55%)] text-[hsl(220,20%,15%)] font-bold px-4 py-2 rounded-lg hover:bg-[hsl(43,96%,45%)] transition-colors text-sm whitespace-nowrap">
                 Apply Now
               </Link>
             </div>
 
-            {/* Mobile Hamburger */}
+            {/* Mobile Hamburger — shown below lg */}
             <button
-              className="xl:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -187,9 +209,8 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="xl:hidden border-t border-white/10 bg-[hsl(219,40%,11%)]">
+          <div className="lg:hidden border-t border-white/10 bg-[hsl(219,40%,11%)]">
             <div className="max-h-[80vh] overflow-y-auto">
-              {/* Student info bar in mobile */}
               {student && (
                 <div className="flex items-center gap-3 px-4 py-3 bg-emerald-800/40 border-b border-white/10">
                   <div className="h-8 w-8 bg-emerald-500 rounded-full flex items-center justify-center text-sm font-bold">{student.name[0]}</div>
@@ -270,13 +291,14 @@ function NavLink({ href, children, active }: { href: string; children: React.Rea
   );
 }
 
-function DropdownNav({ label, isOpen, onToggle, children, wide }: { label: string; isOpen: boolean; onToggle: () => void; children: React.ReactNode; wide?: boolean }) {
+function DropdownNav({ label, isOpen, onToggle, children, wide, icon }: { label: string; isOpen: boolean; onToggle: () => void; children: React.ReactNode; wide?: boolean; icon?: React.ReactNode }) {
   return (
     <div className="relative">
       <button
         onClick={onToggle}
         className={`flex items-center gap-1 px-2.5 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${isOpen ? "bg-white/15 text-white" : "text-white/75 hover:text-white hover:bg-white/10"}`}
       >
+        {icon && icon}
         {label}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
       </button>

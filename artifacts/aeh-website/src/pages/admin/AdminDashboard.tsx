@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useGetDashboardStats, useListApplications, useListContacts } from "@workspace/api-client-react";
 import { useAuth } from "@/lib/auth";
-import { GraduationCap, Users, Briefcase, PhoneCall, LogOut, BarChart2, ChevronRight, BookOpen, IndianRupee, Receipt, UserSquare } from "lucide-react";
+import { GraduationCap, Users, Briefcase, PhoneCall, LogOut, BarChart2, ChevronRight, BookOpen, IndianRupee, Receipt, UserSquare, Clock } from "lucide-react";
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
@@ -25,7 +25,28 @@ export default function AdminDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-foreground mb-6">Dashboard Overview</h1>
+        <h1 className="text-2xl font-bold text-foreground mb-4">Dashboard Overview</h1>
+
+        {stats?.pendingStudents > 0 && (
+          <Link href="/admin/students" className="block mb-6">
+            <div className="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 flex items-center justify-between hover:border-amber-400 hover:bg-amber-100 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 bg-amber-400 rounded-xl flex items-center justify-center">
+                  <Clock className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-amber-800">
+                    {stats.pendingStudents} Student Registration{stats.pendingStudents > 1 ? "s" : ""} Awaiting Approval
+                  </p>
+                  <p className="text-amber-600 text-sm">New students cannot log in until you review and approve their accounts.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shrink-0">
+                Review Now <ChevronRight className="h-4 w-4" />
+              </div>
+            </div>
+          </Link>
+        )}
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
