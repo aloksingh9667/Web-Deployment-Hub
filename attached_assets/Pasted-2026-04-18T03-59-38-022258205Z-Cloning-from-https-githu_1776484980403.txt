@@ -1,0 +1,35 @@
+2026-04-18T03:59:38.022258205Z ==> Cloning from https://github.com/aloksingh9667/aeh-backend
+2026-04-18T03:59:38.600895829Z ==> Checking out commit 497a07f3e0e543f12ab1e0aa8f644d0dd06eb3fb in branch main
+2026-04-18T03:59:40.111551361Z ==> Using Node.js version 22.22.0 (default)
+2026-04-18T03:59:40.141353793Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-04-18T03:59:44.885484837Z ==> Running build command 'yarn install; yarn build'...
+2026-04-18T03:59:45.18748688Z yarn install v1.22.22
+2026-04-18T03:59:45.204659019Z info No lockfile found.
+2026-04-18T03:59:45.206111012Z $ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-04-18T03:59:45.218122494Z Use pnpm instead
+2026-04-18T03:59:45.228075212Z error Command failed with exit code 1.
+2026-04-18T03:59:45.228108033Z info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.
+2026-04-18T03:59:45.408810462Z yarn run v1.22.22
+2026-04-18T03:59:45.430131179Z $ pnpm run typecheck && pnpm -r --if-present run build
+2026-04-18T03:59:45.843900739Z 
+2026-04-18T03:59:45.84392294Z > workspace@0.0.0 typecheck /opt/render/project/src
+2026-04-18T03:59:45.843943321Z > pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-04-18T03:59:45.843949181Z 
+2026-04-18T03:59:46.281412837Z 
+2026-04-18T03:59:46.281433818Z > workspace@0.0.0 typecheck:libs /opt/render/project/src
+2026-04-18T03:59:46.281439678Z > tsc --build
+2026-04-18T03:59:46.281443968Z 
+2026-04-18T03:59:46.470113355Z error TS5083: Cannot read file '/opt/render/lib/db/tsconfig.json'.
+2026-04-18T03:59:46.470248122Z error TS5083: Cannot read file '/opt/render/lib/api-zod/tsconfig.json'.
+2026-04-18T03:59:47.465314119Z error TS2688: Cannot find type definition file for 'node'.
+2026-04-18T03:59:47.46533056Z   The file is in the program because:
+2026-04-18T03:59:47.46533506Z     Entry point of type library 'node' specified in compilerOptions
+2026-04-18T03:59:47.46533835Z error TS5083: Cannot read file '/opt/render/tsconfig.base.json'.
+2026-04-18T03:59:47.465453096Z tsconfig.json(10,5): error TS6053: File '/opt/render/lib/db' not found.
+2026-04-18T03:59:47.465496718Z tsconfig.json(13,5): error TS6053: File '/opt/render/lib/api-zod' not found.
+2026-04-18T03:59:47.497723052Z  ELIFECYCLE  Command failed with exit code 1.
+2026-04-18T03:59:47.533571877Z  ELIFECYCLE  Command failed with exit code 1.
+2026-04-18T03:59:47.570482575Z error Command failed with exit code 1.
+2026-04-18T03:59:47.570508667Z info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+2026-04-18T03:59:47.685322316Z ==> Build failed 😞
+2026-04-18T03:59:47.685346777Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
