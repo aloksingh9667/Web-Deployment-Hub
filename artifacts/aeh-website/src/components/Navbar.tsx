@@ -16,7 +16,7 @@ const programs = [
 ];
 
 const aboutLinks = [
-  { label: "About Avviare", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Core Values", href: "/core-values" },
   { label: "Our Leadership", href: "/leadership" },
   { label: "Academic Council", href: "/academic-council" },
@@ -98,9 +98,9 @@ export function Navbar() {
                 <GraduationCap className="h-5 w-5 text-[hsl(219,40%,16%)]" />
               </div>
               <div className="leading-tight">
-                <span className="text-[hsl(43,96%,55%)] font-extrabold text-base hidden sm:block">Avviare</span>
-                <span className="text-white/80 text-xs font-medium hidden sm:block">Educational Hub</span>
-                <span className="text-[hsl(43,96%,55%)] font-extrabold text-base sm:hidden">AEH</span>
+                <span className="text-[hsl(43,96%,55%)] font-extrabold text-base hidden sm:block">S&T/span>
+                <span className="text-white/80 text-xs font-medium hidden sm:block">Management System</span>
+                <span className="text-[hsl(43,96%,55%)] font-extrabold text-base sm:hidden">S&T</span>
               </div>
             </Link>
 
